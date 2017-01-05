@@ -1,0 +1,257 @@
+/* The Modal (background) */
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+.save-btn{
+float: left;
+display: inline;
+position: center;
+
+}
+
+.data-btn{
+	position: relative;
+	left: 18%;
+	display: block;
+}
+
+.preview-btn{
+position:relative;
+left: 54%;
+display:block;
+}
+
+
+#page-header{
+	text-align: justify;
+	margin-left: 24%;
+	font-weight: bold;
+	text-decoration-style: solid;
+	font-size: 150%;
+	color:#337ab7;
+	text-shadow: 5px 2px 4px #666;
+
+}
+body{
+  background: url(background.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.css-photo {
+	display: block;
+	margin-right: 5%;
+	margin-top: 0.00001%;
+	-webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+.css-photo:hover{
+	border-radius: 50%;
+  -webkit-transform: rotate(360deg);
+     -moz-transform: rotate(360deg);
+       -o-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+          transform: rotate(360deg);
+}
+.photo-html{
+	display: block;
+	margin-bottom: : 7%;
+	margin-right: 5%;
+	-webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+
+.photo-html:hover{
+	border-radius: 50%;
+  -webkit-transform: rotate(360deg);
+     -moz-transform: rotate(360deg);
+       -o-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+          transform: rotate(360deg);
+}
+	@media all and (max-width: 984px){
+		#css
+		{
+			display: none;
+		}
+		#html{
+			display: none;
+		}
+
+	}
+
+	.dynamic-input{
+		text-rendering: auto;
+	    color: initial;
+	    letter-spacing: normal;
+	    word-spacing: normal;
+	    text-transform: none;
+	    text-indent: 0px;
+	    text-shadow: none;
+	    display:inline-block;
+	    text-align: start;
+	    margin: 0em 0em 0em 0em;
+	    font: 13.3333px Arial;
+			font-size: 16px;
+    	padding: 5px;
+    	border-radius: 3px;
+    	border: 1px solid #ccc;
+    	outline: 1;
+
+	}
+
+	label {
+		display: block;
+		max-width: 100%;
+		margin-bottom: 5px;
+		font-weight: bold;
+	}
+
+	label span {
+	    font-family: Helvetica,"Helvetica Neue",Arial,sans-serif;
+	    display: block;
+	    float: left;
+	    width: 135px;
+	    padding-top: 9px;
+	}
+
+
+	.dynamic-select{
+		text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display:inline-block;
+    text-align: start;
+    margin: 0em 0em 0em 0em;
+    font: 13.3333px Arial;
+
+	}
+.span{
+
+	font-family: Helvetica,"Helvetica Neue",Arial,sans-serif;
+
+	width: 100px;
+	padding-top: 9px;
+	display: block;
+	font-size: 14px;
+}
+
+
+.main-area{
+	max-width: 740px;
+	margin: 0 auto;
+	position : fixed;
+	top: 30%;
+	min-height: 100px;
+	left: 30%;
+}
+.showInputs{
+	visibility:visible;;
+}
+
+.interaction-area label{
+	display: block;
+}
+.interaction-area{
+	display: block;
+background-color: purple;
+	max-width: 720px;
+	margin: 0 auto;
+	position : fixed;
+	top: 30%;
+	left: 30%;
+	visibility:hidden;
+	background: #E7B928;
+border: 1px solid #ddd;
+border-bottom: 3px solid #E7B928;
+margin: 0 auto 20px;
+opacity: 1;
+padding: 20px;
+}
+.interaction-area select{
+	border: 1px solid #ccc;
+    margin: 5px 0 2px 2px;
+    font-size: 16px;
+}
+.hidden
+{
+display:none !important;
+}

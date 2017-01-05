@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html  xmlns="http://www.w3.org/1999/xhtml"
+	    xmlns:f="http://xmlns.jcp.org/jsf/core"
+	    xmlns:h="http://xmlns.jcp.org/jsf/html"
+	    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+<title>Че го бъде ли?</title>
+
+<style>
+
+#previewContainer {
+	display: none;
+}
+</style>
+
+</head>
+<body>
+	<script>
+		function myPreview() {
+			var input = document.getElementById("input").value;
+			document.getElementById("preview").value = input;
+			document.getElementById("previewContainer").style.display = "block";
+		}
+		function hidePreview() {
+			document.getElementById("previewContainer").style.display = "none;"
+		}
+	</script>
+
+	<h:form id="form">
+		<div>CSS properties:</div>
+		 #{helloWorld.getMessage}
+		<h:inputText value="#{controller.currentStyle.styleName}"></h:inputText>
+		<br />
+		Border radius:	
+		<input id="input" type="text" onchange="myPreview()" />
+		
+		<button type="button" onclick="myPreview()">Preview</button>
+		<br />
+		<br />
+		<div id="previewContainer">
+		<!-- атрибута name е много важен!!! чрез него ще се прехвърлят всички данни от front-end към back-end -->
+			<textarea id="preview" name="preview"></textarea>
+			<h:outputText>Name</h:outputText>
+			<br />
+			<h:commandLink onclick="hidePreview()" value="submit" type="submit" 
+				action="#{controller.save}">
+				</h:commandLink>
+		</div>
+		<br />
+	</h:form>
+</body>
+</html>

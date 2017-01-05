@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html   xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, utf-8"/>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="main.css"></link>
+	<link rel="stylesheet" href="bootstrap-3.3.7-dist\css\bootstrap.css" media="screen" title="no title"/>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"/>
+	<script type="text/javascript" src="bootstrap-3.3.7-dist\js\bootstrap.js"/>
+</h:head>
+<body>
+	<header id="page-header">
+		<h1>CSS GENERATOR</h1>
+	</header>
+	<div class="wrapper">
+		<h:form id="form"> 
+			<h:messages  id="msg" showDetail="true"
+				showSummary="true" style="text-align:center; margin-left:75%"/>
+				
+				<div class="form-group">
+					<label for=""></label>
+					<div><img id="css" src="CSS.png" class="img-responsive css-photo" alt="Css3 photo" width="280" height="100" align="right"/></div>
+					<h:commandLink id="addNewProductButton" styleClass="addButton w3-btn w3-green w3-round" process="@this" onclick="PF('dlg2').show()">
+			</h:commandLink>
+					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Border Radius</button>
+				</div>
+				<div class="form-group">
+					<label for=""></label>
+					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Box Shadow</button>
+				</div>
+
+				<div class="form-group">
+					<label for=""></label>
+					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Text Shadow</button>
+				</div>
+				<div class="form-group">
+					<label for=""></label>
+					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">RGBA</button>
+				</div>
+				<div class="form-group">
+					<label for=""></label>
+					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Font Face</button>
+				</div>
+				<div class="form-group">
+
+					<label for=""></label>
+					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Multiple Colums</button>
+				</div>
+				<div><img id="html" src="HTML.png" class="img-responsive photo-html" alt="Html5 photo" width="280" height="100" align="right"/></div>
+				<div class="form-group">
+					<label for=""></label>
+					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Box Resize</button>
+				</div>
+				<div class="form-group">
+					<label for=""></label>
+					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Outline</button>
+				</div>
+				<div class="form-group">
+					<label for=""></label>
+					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Transition</button>
+				</div>
+				<div class="form-group">
+					<label for=""></label>
+					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Transform</button>
+				</div>
+			<div class="main-area">
+				<div id="interaction-area-main" class="interaction-area">
+			<div id="border-radius" class="interaction-area">
+						<label>
+              <span>Top Left:</span>
+              <input tabindex="1"  type="text" size="2" class="border-radius-input dynamic-input"/><i>px</i></label>
+						<label><span>Top Right:</span>
+              <input tabindex="2"  type="text" size="2" class="border-radius-input dynamic-input"/><i>px</i>
+            </label>
+            <label><span>Bottom Right:</span>
+              <input tabindex="3" type="text" size="2" class="border-radius-input dynamic-input"/><i>px</i>
+            </label>
+            <label><span>Bottom Left:</span>
+            <input tabindex="4" type="text" size="2" class="border-radius-input dynamic-input"/><i>px</i>
+          </label>
+          <div id="border-radius-code" class="code-area">
+         <textarea name="border-result-area" style="width:200px" id="border-result-area" class="result-area"/>
+					<label>
+						<span>Style:</span>
+						<h:selectOneMenu id="border-radius-styles" value="#{controller.currentStyle.id}">
+						<f:selectItem value="#{controller.listOfCssStyles}" var="cssStyle"
+						itemValue="cssStyle.id" itemLabel="cssStyle.styleName">
+						</f:selectItem>
+						</h:selectOneMenu>
+				</label>
+          	<button id="myBtn" type="button" style="margin: 10px; 0px;" class="btn btn-default btn-lg">Save</button>
+              <button type="button" style="margin:10px; 0px" class="back-btn btn btn-default btn-lg back-btn">Back</button>
+        </div>
+		      <!-- Modal -->
+		  <div class="modal fade" id="myModal2" role="dialog">	
+		    <div class="modal-dialog">
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">×</button>
+		          <h4 class="modal-title">Confirm save</h4>
+		        </div>
+		        <div class="modal-body row" >
+		        <div class="col-md-1"></div>
+		        <div class="col-md-1">
+		        <h:outputText style="text-align:right" value="Name" />
+		        </div> 
+		        <div class="col-md-6">
+		        <h:inputText value="#{controller.currentStyle.styleName}" styleClass="ui-g-3">Name</h:inputText>
+		        </div>
+		        </div>
+		        <br />
+		        <div  class="row">
+		        <div class="col-md-7"/>
+		        <div class="col-md-2">
+		        <h:commandLink action="#{controller.save}" style="margin-bottom:10px;" styleClass="btn btn-default " value="OK"/>
+		        </div>
+		         <div class="col-md-2">
+		        <h:commandLink action="#{controller.resetCSS}" value="Back" class="btn btn-default" style="margin-bottom:10px;" data-dismiss="modal"/>
+		        </div>
+		        </div>
+		       
+		    </div>
+		  </div>
+		</div>
+
+		</div>
+  <div id="box-shadow" class="interaction-area">
+            <label>
+              <span>Inset:</span>
+              <select tabindex="5" id="box-shadow-inset"  >
+                <option value="No">No</option>
+                <option value="Inset">Inset</option>
+              </select></label>
+              <label>
+                <span>Horizontal Length:</span>
+                <input tabindex="6" type="text" size="2"  class="box-shadow-input dynamic-input"/><i>px</i>
+              </label>
+              <label>
+                <span>Vertical Length:</span>
+                <input tabindex="7"  type="text" class="box-shadow-input dynamic-input" size="2"/><i>px</i></label>
+                <label><span>Blur Radius:</span>
+									<input tabindex="8" type="text" size="2" class="box-shadow-input dynamic-input"/><i>px</i></label>
+                <label><span>Spread:</span>
+                  <input tabindex="9"  type="text" size="2"  class="box-shadow-input dynamic-input"/><i>px</i></label>
+                  <label>
+                    <span>Color Type:</span>
+                    <select tabindex="10" id="box-shadow-color"  class="dynamic-input">
+										<option value="undefined"></option>
+                    <option value="rgba">RGBA</option>
+                    <option value="hex">Hex</option></select></label>
+    <label class="hidden">
+      <span>RGBA Color:</span> <input tabindex="11" name="box-shadow-r" type="text" size="3"
+			class="box-shadow-input dynamic-input"/>,<input tabindex="12" type="text" size="3"
+			class="box-shadow-input dynamic-input"/>,<input tabindex="13"  type="text" size="3"
+			class="box-shadow-input dynamic-input"/>,<input tabindex="14"  type="text" size="3"
+			class="box-shadow-input dynamic-input"/></label>
+      <label class="hidden"><span>Hex Color:</span>
+        <input tabindex="15"  type="text" size="5" class="box-shadow-input dynamic-input" />
+      </label>
+  		<div id="box-shadow-code" class="code-area">
+        <textarea name="boxShadow-result-area"  id="boxShadow-result-area" class="result-area"></textarea>
+				<button type="button" class="btn btn-default btn-lg save-btn">Save</button>
+				  <button type="button" class="back-btn btn btn-default btn-lg back-btn">Back</button>
+    </div>
+</div>
+<div id="text-shadow" class="interaction-area">
+	<label>
+		<span>Horizontal Length:</span>
+		<input tabindex="16"  type="text" size="2"
+		 class="text-shadow-input dynamic-input"/><i>px</i>
+</label>
+<label>
+	<span>Vertical Length:</span>
+	<input tabindex="17"  type="text" size="2"
+	 class="text-shadow-input dynamic-input"/><i>px</i></label><label>
+		 <span>Blur Radius:</span>
+			 <input tabindex="18" type="text" size="2" class="text-shadow-input dynamic-input"/><i>px</i>
+</label>
+<label>
+	<span>Shadow Color:</span>
+	<input tabindex="19"  type="text" size="5"
+ class="text-shadow-input dynamic-input"
+ /> </label>
+<div id="text-shadow-code" class="code-area">
+		<pre id="text-shadow-result-area" class="result-area"></pre>
+		<button type="button" class="btn btn-default btn-lg save-btn">Save</button>
+	  <button type="button" class="back-btn btn btn-default btn-lg back-btn">Back</button>
+		</div>
+		</div>
+<div id="rgba" class="interaction-area">
+	<label>
+		<span>R:</span>
+		<input tabindex="20" name="rgba-r" type="text" size="2" class="rgba-input dynamic-input"/>
+		</label>
+		<label>
+			<span>G:</span><input tabindex="21"  type="text" size="2" class="rgba-input dynamic-input"/>
+</label>
+<label>
+	<span>B:</span>
+	<input tabindex="22" name="rgba-b" type="text" size="2" class="rgba-input dynamic-input"/>
+</label>
+<label>
+	<span>Opacity:</span>
+<input tabindex="23" type="text" size="2" class="rgba-input dynamic-input"/></label>
+
+	<div id="rgba-code" class="code-area">
+		<button type="button" class="btn btn-default btn-lg save-btn">Save</button>
+		  <button type="button" class="back-btn btn btn-default btn-lg back-btn">Back</button>
+	</div>
+</div>
+<div id="font-face" class="interaction-area"><label>
+	<span>Font Family:</span>
+	<input tabindex="24"  type="text" size="10" class="font-face-input dynamic-input"/>
+</label>
+<label>
+	<span>Font Name:</span><input tabindex="25" name="font-face-name" type="text" size="10" class="font-face-input dynamic-input"/></label>
+	<div id="font-face-code" class="code-area">
+		<pre id="font-face-result-area" class="result-area"></pre>
+		<button type="button" class="btn btn-default btn-lg save-btn">Save</button>
+	  <button type="button" class="back-btn btn btn-default btn-lg back-btn">Back</button>
+	</div>
+</div>
+<div id="multiple-columns" class="interaction-area"><label>
+	<span># of Columns:</span><input tabindex="26"  type="text" size="10" class="multiple-columns-input dynamic-input"/>
+</label>
+<label>
+	<span>Column Gap:</span>
+	<input tabindex="27" type="text" size="10" class="multiple-columns-input dynamic-input"/>
+<i>px</i></label>
+	<div id="multiple-columns-code" class="code-area" style="display: block;">
+		<pre id="multiple-columns-result-area" class="code-area">
+		</pre>
+		<button type="button" class="btn btn-default btn-lg save-btn">Save</button>
+	  <button type="button" class="back-btn btn btn-default btn-lg back-btn">Back</button>
+	</div>
+</div>
+<div id="box-resize" class="interaction-area"><label><span>Box Resize:</span>
+	<select tabindex="28" id="box-resize-type" class="dynamic-select">
+		<option value="none">None</option>
+		<option value="horizontal">Horizontal</option>
+		<option value="vertical">Vertical</option>
+		<!-- <optionvalue="both">Both</optionvalue> --></select></label>
+    <div id="box-resize-code" class="code-area">
+      <pre id="box-resize-result-area" class="result-area"></pre>
+			<button type="button" class="btn btn-default btn-lg save-btn">Save</button>
+			  <button type="button" class="back-btn btn btn-default btn-lg back-btn">Back</button>
+	</div>
+</div>
+<div id="outline" class="interaction-area"><label>
+	<span>OutlineThickness:</span>
+<input tabindex="29" type="text" size="10" class="outline-input dynamic-input"/>
+<i>px</i></label>
+<label><span>Outline:</span>
+<select tabindex="30" id="outline-style">
+<option value="? undefined:undefined ?"></option>
+<option value="dotted">Dotted</option>
+<option value="dashed">Dashed
+</option>
+<option value="solid">Solid
+	</option>
+<option value="groove">Groove</option>
+<option value="ridge">Ridge</option>
+<option value="inset">Inset</option>
+<option value="outset">Outset
+</option>
+<option value="double">Double</option>
+<option value="auto">Auto</option>
+</select>
+</label>
+<label>
+	<span>OutlineColor:</span>
+	<input tabindex="31" type="text" size="10" class="outline-input dynamic-input" /></label>
+	<label>
+		<span>Outline Offset:</span>
+		<input tabindex="32"  type="text" size="10" class="outline-input dynamic-input"/></label>
+    <div id="outline-code" class="code-area">
+        <pre id="outline-result-area" class="result-area"></pre>
+        <button type="button" class="btn btn-default btn-lg save-btn">Save</button>
+          <button type="button" class="back-btn btn btn-default btn-lg back-btn">Back</button>
+    </div>
+</div>
+<div id="transition" class="interaction-area">
+    <label>
+			<span>Property:</span>
+			<select tabindex="33" id="transition-property">
+		<option value="? undefined:undefined ?"></option><option value="all">All</option><option value="background">Background</option>
+		<option value="color">Color</option>
+		<option value="height">Height</option><option value="width">Width</option>
+		<option value="outline">Outline</option></select></label>
+		<label><span>Duration:</span>
+			<input tabindex="34"  type="text" size="10" class="transition-input dynamic-input"/>
+			<select tabindex="35" id="transition-time" class="">
+			<option value="? undefined:undefined ?"></option>
+				<option value="ms">Milliseconds</option>
+				<option value="s">Seconds</option></select>
+				</label><label>
+					<span>Function:</span>
+					<select tabindex="36" id="transition-function" name="transition-function" >
+						<option value="? undefined:undefined ?"></option>
+						<option value="ease">Ease</option><option value="linear">Linear</option>
+						<option value="ease-in">Ease-In</option><option value="ease-out">Ease-Out</option>
+						<option value="ease-in-out">Ease-In-Out</option>
+					</select></label>
+
+    <div id="transition-code" class="result-area">
+        <pre id="transition-result-area" class="result-area"></pre>
+        <button type="button" class="btn btn-default btn-lg save-btn">Save</button>
+        <button type="button" class="back-btn btn btn-default btn-lg back-btn">Back</button>
+    </div>
+</div>
+<div id="transform" class="interaction-area"><label>
+	<span>Scale:</span>
+	<input tabindex="37" name="transform-scale" type="text" size="2" class="transform-input dynamic-input"/></label>
+	<label><span>Rotate:</span>
+		<input tabindex="38" name="transform-rotate" type="text" size="2" class="transform-input dynamic-input"/><i>deg</i></label>
+	<label><span>Translate:</span>
+	<input tabindex="39" name="transform-translate-x" type="text" size="2" class="transform-input dynamic-input"/>
+	<i style="padding-right:10px">px</i>
+	<input tabindex="40" name="transform-translate-y" type="text" size="2" class="transform-input dynamic-input"/>
+	<i>px</i>
+	</label>
+	<label>
+		<span>Skew:</span>
+		<input tabindex="41" name="transform-skew-x" type="text" size="2" class="transform-input dynamic-input"/><i>deg</i>
+		<input tabindex="42" name="transform-skew-y" type="text" size="2" class="transform-input dynamic-input"/><i>deg</i>
+		</label>
+	<div id="transform-code" class="code-area" style="display: block;">
+		<pre id="transform-result-area" class="result-area"></pre>
+	</div>
+</div>
+</div>
+</div>
+
+</h:form>
+	</div>
+	<script type="text/javascript" src="main.js"/>
+</body>
+</html>
