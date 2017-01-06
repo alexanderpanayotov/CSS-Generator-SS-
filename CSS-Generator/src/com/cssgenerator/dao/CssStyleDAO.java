@@ -2,7 +2,6 @@ package com.cssgenerator.dao;
 
 //import java.util.List;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -48,7 +47,7 @@ public class CssStyleDAO {
 	public List loadAllStyles(EntityManager entitymanager) {
 		
 		try {
-			String sql = "FROM CssStyle";
+			String sql = "Select e from CssStyle e";
 			Query query = entitymanager.createQuery(sql);
 			List<CssStyle> results = (List<CssStyle>) query.getResultList();
 			return results;
@@ -57,9 +56,8 @@ public class CssStyleDAO {
 		}
 	}
 
-	public List loadStyleByType(CssStyle css, EntityManager entitymanager) {
+	public List loadStyleByType(EntityManager entitymanager, String type) {
 		
-		String type = css.getType();
 		try {
 			String sql = "From CssStyle css Where css.type =:type";
 			Query query = entitymanager.createQuery(sql);

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html   xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -10,7 +10,7 @@
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="main.css"></link>
 	<link rel="stylesheet" href="bootstrap-3.3.7-dist\css\bootstrap.css" media="screen" title="no title"/>
-	
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"/>
 	<script type="text/javascript" src="bootstrap-3.3.7-dist\js\bootstrap.js"/>
 </h:head>
@@ -19,55 +19,55 @@
 		<h1>CSS GENERATOR</h1>
 	</header>
 	<div class="wrapper">
-		<h:form id="form"> 
+		<h:form id="form">
 			<h:messages  id="msg" showDetail="true"
 				showSummary="true" style="text-align:center; margin-left:75%"/>
-				
+
 				<div class="form-group">
 					<label for=""></label>
 					<div><img id="css" src="CSS.png" class="img-responsive css-photo" alt="Css3 photo" width="280" height="100" align="right"/></div>
-					<h:commandLink id="addNewProductButton" styleClass="addButton w3-btn w3-green w3-round" process="@this" onclick="PF('dlg2').show()">
-			</h:commandLink>
-					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Border Radius</button>
+					<h:commandButton type="button" action="#{controller.loadByType('border-radius')}" id="btn-border-radius" styleClass="btn btn-primary btn-lg btn-block btn-success"/>
+					
+					<button type="button" class="">Border Radius</button>
 				</div>
 				<div class="form-group">
 					<label for=""></label>
-					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Box Shadow</button>
+					<h:commandButton type="button" id="btn-box-shadow" styleClass="btn btn-primary btn-lg btn-block btn-success" value="Box Shadow"/>
 				</div>
 
 				<div class="form-group">
 					<label for=""></label>
-					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Text Shadow</button>
+					<h:commandButton type="button" id="btn-text-shadow" styleClass="btn btn-primary btn-lg btn-block btn-success" value="Text Shadow"/>
 				</div>
 				<div class="form-group">
 					<label for=""></label>
-					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">RGBA</button>
+					<h:commandButton type="button" id="btn-rgba" styleClass="btn btn-primary btn-lg btn-block btn-success" value="RGBA"/>
 				</div>
 				<div class="form-group">
 					<label for=""></label>
-					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Font Face</button>
+					<h:commandButton type="button" styleClass="btn btn-primary btn-lg btn-block btn-success" value="Font Face"/>
 				</div>
 				<div class="form-group">
 
 					<label for=""></label>
-					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Multiple Colums</button>
+					<h:commandButton type="button" id="btn-multiple-columns" styleClass="btn btn-primary btn-lg btn-block btn-success" value="Multiple Colums"/>
 				</div>
 				<div><img id="html" src="HTML.png" class="img-responsive photo-html" alt="Html5 photo" width="280" height="100" align="right"/></div>
 				<div class="form-group">
 					<label for=""></label>
-					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Box Resize</button>
+					<h:commandButton id="btn-box-resize" type="button" styleClass="btn btn-primary btn-lg btn-block btn-success" value="Box Resize"/>
 				</div>
 				<div class="form-group">
 					<label for=""></label>
-					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Outline</button>
+					<h:commandButton id="btn-outline" type="button" styleClass="btn btn-primary btn-lg btn-block btn-success" value="Outline"/>
 				</div>
 				<div class="form-group">
 					<label for=""></label>
-					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Transition</button>
+					<h:commandButton id="btn-transition" type="button" styleClass="btn btn-primary btn-lg btn-block btn-success" value="Transition"/>
 				</div>
 				<div class="form-group">
 					<label for=""></label>
-					<button type="button" class="btn btn-primary btn-lg btn-block btn-success">Transform</button>
+					<h:commandButton id="btn-transform" type="button" class="btn btn-primary btn-lg btn-block btn-success" value="Transform"/>
 				</div>
 			<div class="main-area">
 				<div id="interaction-area-main" class="interaction-area">
@@ -87,18 +87,17 @@
           <div id="border-radius-code" class="code-area">
          <textarea name="border-result-area" style="width:200px" id="border-result-area" class="result-area"/>
 					<label>
-						<span>Style:</span>
-						<h:selectOneMenu id="border-radius-styles" value="#{controller.currentStyle.id}">
-						<f:selectItem value="#{controller.listOfCssStyles}" var="cssStyle"
-						itemValue="cssStyle.id" itemLabel="cssStyle.styleName">
-						</f:selectItem>
+						Style:
+						<h:selectOneMenu  styleClass="list" value="#{controller.currentStyle.id}">
+						<f:selectItems value="#{controller.listOfCssStyles}" var="cssStyle" itemLabel="#{cssStyle.styleName}" 
+						itemValue="#{cssStyle.id}"></f:selectItems>
 						</h:selectOneMenu>
 				</label>
           	<button id="myBtn" type="button" style="margin: 10px; 0px;" class="btn btn-default btn-lg">Save</button>
               <button type="button" style="margin:10px; 0px" class="back-btn btn btn-default btn-lg back-btn">Back</button>
         </div>
 		      <!-- Modal -->
-		  <div class="modal fade" id="myModal2" role="dialog">	
+		  <div class="modal fade" id="myModal2" role="dialog">
 		    <div class="modal-dialog">
 		      <!-- Modal content-->
 		      <div class="modal-content">
@@ -110,7 +109,7 @@
 		        <div class="col-md-1"></div>
 		        <div class="col-md-1">
 		        <h:outputText style="text-align:right" value="Name" />
-		        </div> 
+		        </div>
 		        <div class="col-md-6">
 		        <h:inputText value="#{controller.currentStyle.styleName}" styleClass="ui-g-3">Name</h:inputText>
 		        </div>
@@ -125,7 +124,7 @@
 		        <h:commandLink action="#{controller.resetCSS}" value="Back" class="btn btn-default" style="margin-bottom:10px;" data-dismiss="modal"/>
 		        </div>
 		        </div>
-		       
+
 		    </div>
 		  </div>
 		</div>
@@ -211,6 +210,7 @@
 <input tabindex="23" type="text" size="2" class="rgba-input dynamic-input"/></label>
 
 	<div id="rgba-code" class="code-area">
+			<pre id="rgba-result-area" class="result-area"></pre>
 		<button type="button" class="btn btn-default btn-lg save-btn">Save</button>
 		  <button type="button" class="back-btn btn btn-default btn-lg back-btn">Back</button>
 	</div>

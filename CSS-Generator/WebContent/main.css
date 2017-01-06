@@ -1,5 +1,16 @@
-/* The Modal (background) */
+.messages {
+	background-color: #008040;
+	opacity: 0.4;
+}
+.inline {
+	display: inline;
+}
+.list {
+	margin-left:10px;
+	width: 150px;
+}
 
+/* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */

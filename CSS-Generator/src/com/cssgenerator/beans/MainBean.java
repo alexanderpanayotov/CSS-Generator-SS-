@@ -1,5 +1,6 @@
 package com.cssgenerator.beans;
 
+import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -23,6 +25,7 @@ import org.hibernate.HibernateException;
 
 import com.cssgenerator.dao.CssStyleDAO;
 import com.cssgenerator.entities.CssStyle;
+import com.sun.corba.se.spi.orbutil.fsm.Action;
 
 @ManagedBean(name = "controller")
 @ViewScoped
@@ -31,8 +34,8 @@ public class MainBean implements Serializable {
 	private static final long serialVersionUID = -7182134510999986302L;
 
 	private CssStyle currentStyle = new CssStyle();
-	private String name = new String();
 	private List<CssStyle> listOfCssStyles;
+	private static final CssStyleDAO dao = new CssStyleDAO();
 	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Hibernate_JPA");
 
 	public String getMessage() {
@@ -42,7 +45,12 @@ public class MainBean implements Serializable {
 	public void resetCSS() {
 		currentStyle = new CssStyle();
 	}
-
+	/*@PostConstruct
+	public void init() {
+	EntityManager entitymanager = emf.createEntityManager();
+	listOfCssStyles = dao.loadAllStyles(entitymanager);
+	}*/
+	
 	public String save() {
 		EntityManager entitymanager = emf.createEntityManager();
 		EntityTransaction transaction = null;
@@ -66,10 +74,8 @@ public class MainBean implements Serializable {
 		}
 
 		
-		if (css != null ) {
 			getCurrentStyle().setCss(css);
 
-			CssStyleDAO dao = new CssStyleDAO();
 			try {
 				transaction = entitymanager.getTransaction();
 				transaction.begin();
@@ -99,16 +105,26 @@ public class MainBean implements Serializable {
 				currentStyle = new CssStyle();
 
 			}
-		}
 		return null;
 	}
 
 	public void load() {
 
 		EntityManager entitymanager = emf.createEntityManager();
-		CssStyleDAO dao = new CssStyleDAO();
 		try {
 			setListOfCssStyles(dao.loadAllStyles(entitymanager));
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+		} finally {
+			entitymanager.close();
+		}
+	}
+	
+	public void loadByType(String type) {
+
+		EntityManager entitymanager = emf.createEntityManager();
+		try {
+			setListOfCssStyles(dao.loadStyleByType(entitymanager, type));
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 		} finally {
@@ -130,7 +146,6 @@ public class MainBean implements Serializable {
 	}
 
 	public List<CssStyle> getListOfCssStyles() {
-		load();
 		return listOfCssStyles;
 	}
 
@@ -138,12 +153,5 @@ public class MainBean implements Serializable {
 		this.listOfCssStyles = listOfCssStyles;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 }

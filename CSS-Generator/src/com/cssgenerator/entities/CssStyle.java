@@ -44,5 +44,9 @@ public class CssStyle implements Serializable {
 	public void setCss(String css) {
 		this.css = css;
 	}
+	@Override
+	public String toString() {
+		return "CssStyle [id=" + id + ", type=" + type + ", styleName=" + styleName + ", css=" + css + "]";
+	}
 	
 }
