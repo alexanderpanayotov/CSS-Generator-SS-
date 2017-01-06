@@ -59,20 +59,56 @@ var transform={
   skewY:""
 };
 
-$(".save-btn").on("click", function() {
-    var category = prompt("Would you like to save ?");
-    console.log(category);
-    if (category != null) {
-    $("#border-radius-style").append("<option>"+category+"</option>");
-  }
-
-});
 $(document).ready(function(){
 	  $("#myBtn").click(function(){
+	        $("#myModal").modal({backdrop: false});
+	    });
+});
+$(document).ready(function(){
+	  $("#myBtn1").click(function(){
+	        $("#myModal1").modal({backdrop: false});
+	    });
+});
+$(document).ready(function(){
+	  $("#myBtn2").click(function(){
 	        $("#myModal2").modal({backdrop: false});
 	    });
 });
-
+$(document).ready(function(){
+	  $("#myBtn3").click(function(){
+	        $("#myModal3").modal({backdrop: false});
+	    });
+});
+$(document).ready(function(){
+	  $("#myBtn4").click(function(){
+	        $("#myModal4").modal({backdrop: false});
+	    });
+});
+$(document).ready(function(){
+	  $("#myBtn5").click(function(){
+	        $("#myModal5").modal({backdrop: false});
+	    });
+});
+$(document).ready(function(){
+	  $("#myBtn6").click(function(){
+	        $("#myModal6").modal({backdrop: false});
+	    });
+});
+$(document).ready(function(){
+	  $("#myBtn7").click(function(){
+	        $("#myModal7").modal({backdrop: false});
+	    });
+});
+$(document).ready(function(){
+	  $("#myBtn8").click(function(){
+	        $("#myModal8").modal({backdrop: false});
+	    });
+});
+$(document).ready(function(){
+	  $("#myBtn9").click(function(){
+	        $("#myModal9").modal({backdrop: false});
+	    });
+});
 function PrintTransform()
 {
   $("#transform-result-area").html("transform: "+ "scale"+"(" + transform.scale+")"
@@ -348,35 +384,35 @@ PrintTransform();
 $cssButtons.on("click",function(){
 
 var $this=$(this);
-if ($this.text() =="Border Radius") {
+if ($this.val() =="Border Radius") {
 $("#border-radius").css("visibility","initial");
 }
-if ($this.text()=="Box Shadow") {
+if ($this.val()=="Box Shadow") {
 $("#box-shadow").css("visibility","initial");
 }
 
-if ($this.text()=="Text Shadow") {
+if ($this.val()=="Text Shadow") {
 $("#text-shadow").css("visibility","initial");
 }
-if ($this.text()=="RGBA") {
+if ($this.val()=="RGBA") {
 $("#rgba").css("visibility","initial");
 }
-if ($this.text()=="Font Face") {
+if ($this.val()=="Font Face") {
   $("#font-face").css("visibility","initial");
 }
-if ($this.text()=="Multiple Colums") {
+if ($this.val()=="Multiple Colums") {
   $("#multiple-columns").css("visibility","initial");
 }
-if ($this.text()=="Box Resize") {
+if ($this.val()=="Box Resize") {
   $("#box-resize").css("visibility","initial");
 }
-if ($this.text()=="Outline") {
+if ($this.val()=="Outline") {
   $("#outline").css("visibility","initial");
 }
-if ($this.text()=="Transition") {
+if ($this.val()=="Transition") {
   $("#transition").css("visibility","initial");
 }
-if ($this.text()=="Transform") {
+if ($this.val()=="Transform") {
     $("#transform").css("visibility","initial");
 }
 
