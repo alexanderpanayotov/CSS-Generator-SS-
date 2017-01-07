@@ -200,13 +200,13 @@ PrintBoxShadow();
   jrgba.removeClass("otherclass").addClass("hidden");
   }
   });
-
-$(".back-btn").on("click",function() {
+  
+/*$(".back-btn").on("click",function() {
 
   $cssButtons.css("visibility","initial");
   $(".interaction-area").css("visibility","hidden");
 });
-
+*/
 $(".text-shadow-input").on("input",function(){
 var $this=$(this);
 
@@ -233,11 +233,7 @@ var $this=$(this);
 + ' '  + "#"+textShadow.shadowColor +";");
 });
 
-$(".back-btn").on("click",function() {
 
-  $cssButtons.css("visibility","initial");
-  $(".interaction-area").css("visibility","hidden");
-});
 
 $(".rgba-input").on("input",function(){
 var $this=$(this);
@@ -379,8 +375,7 @@ PrintTransform();
 });
 
 
-
-
+/*
 $cssButtons.on("click",function(){
 
 var $this=$(this);
@@ -418,3 +413,21 @@ if ($this.val()=="Transform") {
 
 $cssButtons.css("visibility","hidden");
 });
+*/
+ function showBorderRadius() {
+	$("#border-radius").css("visibility","visible");
+	$cssButtons.css("visibility","hidden");
+}
+function showBoxShadow() {
+	$("#box-shadow").css("visibility","visible");
+	$cssButtons.css("visibility","hidden");
+}
+ 
+ $(".back-btn").on("click",function() {
+	  $cssButtons.css("visibility","visible");
+	  $(".interaction-area").css("visibility","hidden");
+	});
+function confirmSave() {
+	$cssButtons.css("visibility","visible");
+	  $(".interaction-area").css("visibility","hidden");
+}

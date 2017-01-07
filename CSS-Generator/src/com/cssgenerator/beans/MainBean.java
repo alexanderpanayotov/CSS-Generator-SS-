@@ -37,6 +37,7 @@ public class MainBean implements Serializable {
 	private List<CssStyle> listOfCssStyles;
 	private static final CssStyleDAO dao = new CssStyleDAO();
 	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Hibernate_JPA");
+	private String name;
 
 	public String getMessage() {
 		return "Hello World!";
@@ -44,71 +45,68 @@ public class MainBean implements Serializable {
 
 	public void resetCSS() {
 		currentStyle = new CssStyle();
+		name = "";
 	}
-	/*@PostConstruct
-	public void init() {
-	EntityManager entitymanager = emf.createEntityManager();
-	listOfCssStyles = dao.loadAllStyles(entitymanager);
-	}*/
-	
+	/*
+	 * @PostConstruct public void init() { EntityManager entitymanager =
+	 * emf.createEntityManager(); listOfCssStyles =
+	 * dao.loadAllStyles(entitymanager); }
+	 */
+
 	public String save() {
 		EntityManager entitymanager = emf.createEntityManager();
 		EntityTransaction transaction = null;
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 				.getRequest();
 
-		String css = null;
-		
-		if (request.getParameter("border-result-area") != null){
-			css = request.getParameter("border-result-area");
-			getCurrentStyle().setType("border-radius");
-		}else if (request.getParameter("boxShadow-result-area") != null) {
-			css = request.getParameter("border-result-area");
-			getCurrentStyle().setType("border-radius");
-		}else if (request.getParameter("boxShadow-result-area") != null) {
-			css = request.getParameter("border-result-area");
-			getCurrentStyle().setType("border-radius");
-		}else if (request.getParameter("boxShadow-result-area") != null) {
-			css = request.getParameter("border-result-area");
-			getCurrentStyle().setType("border-radius");
+		if (!request.getParameter("border-result-area").isEmpty()) {
+			currentStyle.setCss(request.getParameter("border-result-area"));
+			currentStyle.setType("border-radius");
+		} else if (!request.getParameter("boxShadow-result-area").isEmpty()) {
+			currentStyle.setCss(request.getParameter("boxShadow-result-area"));
+			currentStyle.setType("box-shadow");
+		} else if (request.getParameter("boxShadow-result-area") != null) {
+			currentStyle.setCss(request.getParameter("border-result-area"));
+			currentStyle.setType("border-radius");
+		} else if (request.getParameter("boxShadow-result-area") != null) {
+			currentStyle.setCss(request.getParameter("border-result-area"));
+			currentStyle.setType("border-radius");
 		}
-
+		currentStyle.setStyleName(request.getParameter("name"));
 		
-			getCurrentStyle().setCss(css);
+		try {
+			transaction = entitymanager.getTransaction();
+			transaction.begin();
+			dao.save(getCurrentStyle(), entitymanager);
+			transaction.commit();
 
-			try {
-				transaction = entitymanager.getTransaction();
-				transaction.begin();
-				dao.save(getCurrentStyle(), entitymanager);
-				transaction.commit();
-
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Инфо:", "Успешeн запис.");
-				addFacesContextMessage(message);
-			} catch (IllegalArgumentException e) {
-				if (transaction != null && transaction.isActive()) {
-					transaction.rollback();
-				}
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Инфо:", e.getMessage());
-				addFacesContextMessage(message);
-			} catch (PersistenceException e) {
-				if (transaction != null && transaction.isActive()) {
-					transaction.rollback();
-				}
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Инфо:", "Неуспешен запис.");
-				addFacesContextMessage(message);
-				e.printStackTrace();
-
-			} finally {
-				if (entitymanager.isOpen()) {
-					entitymanager.close();
-				}
-				currentStyle = new CssStyle();
-
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Инфо:", "Успешeн запис.");
+			addFacesContextMessage(message);
+		} catch (IllegalArgumentException e) {
+			if (transaction != null && transaction.isActive()) {
+				transaction.rollback();
 			}
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Инфо:", e.getMessage());
+			addFacesContextMessage(message);
+		} catch (PersistenceException e) {
+			if (transaction != null && transaction.isActive()) {
+				transaction.rollback();
+			}
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Инфо:", "Неуспешен запис.");
+			addFacesContextMessage(message);
+			e.printStackTrace();
+
+		} finally {
+			if (entitymanager.isOpen()) {
+				entitymanager.close();
+			}
+			currentStyle = new CssStyle();
+			name = "";
+		}
 		return null;
 	}
 
-	public void load() {
+	public String load() {
 
 		EntityManager entitymanager = emf.createEntityManager();
 		try {
@@ -118,10 +116,10 @@ public class MainBean implements Serializable {
 		} finally {
 			entitymanager.close();
 		}
+		return null;
 	}
-	
-	public void loadByType(String type) {
 
+	public void loadByType(String type) {
 		EntityManager entitymanager = emf.createEntityManager();
 		try {
 			setListOfCssStyles(dao.loadStyleByType(entitymanager, type));
@@ -153,5 +151,12 @@ public class MainBean implements Serializable {
 		this.listOfCssStyles = listOfCssStyles;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }
