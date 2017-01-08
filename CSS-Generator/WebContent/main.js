@@ -376,10 +376,11 @@ PrintTransform();
 });
 
 
-/*
-$cssButtons.on("click",function(){
+
+/*$cssButtons.on("click",function(){
 
 var $this=$(this);
+console.log(1);
 if ($this.val() =="Border Radius") {
 $("#border-radius").css("visibility","initial");
 }
@@ -438,4 +439,7 @@ function showBoxShadow() {
 	});
 function hideModal (){
 	$("#myModal").modal("hide");
+}
+function hideModal1 (){
+	$("#myModal1").modal("hide");
 }

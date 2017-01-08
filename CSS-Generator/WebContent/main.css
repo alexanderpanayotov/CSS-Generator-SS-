@@ -241,7 +241,7 @@ label span {
 }
 
 .main-area {
-	max-width: 740px;
+	max-width: 1024px;
 	margin: 0 auto;
 	position: fixed;
 	top: 30%;
@@ -260,7 +260,7 @@ label span {
 .interaction-area {
 	display: block;
 	background-color: purple;
-	max-width: 720px;
+	max-width: 1024px;
 	margin: 0 auto;
 	position: fixed;
 	top: 30%;

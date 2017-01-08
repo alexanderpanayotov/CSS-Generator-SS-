@@ -44,12 +44,11 @@
 
 				<div class="form-group">
 					<label for=""></label>
-					<h:commandLink type="button" id="btn-box-shadow"
+					<h:commandLink type="button" value="Box Shadow"
 						action="#{controller.loadByType('box-shadow')}"
-						styleClass="btn btn-primary btn-lg btn-block btn-success"
-						value="Box Shadow">
+						styleClass="btn btn-primary btn-lg btn-block btn-success">
 						<f:ajax onevent="showBoxShadow" execute="form"
-							render="saved-box-shadow-styles"></f:ajax>
+							render="saved-box-shadow-styles msg"></f:ajax>
 					</h:commandLink>
 				</div>
 
@@ -124,28 +123,32 @@
 						<div id="border-radius-code" class="code-area">
 							<textarea name="border-result-area" id="border-result-area"
 								class="result-area" />
-							<label>Saved styles: <h:selectOneMenu
+							<label>Saved styles: 
+							<h:selectOneMenu
 									id="saved-border-radius-styles"
-									value="#{controller.currentStyle.id}" immediate="true" valueChangeListener="#{controller.changeSelectedStyle}">
+									value="#{controller.currentStyle.id}" immediate="true"
+									valueChangeListener="#{controller.changeSelectedStyle}">
 									<f:selectItems value="#{controller.listOfCssStyles}"
 										var="cssStyle" itemLabel="#{cssStyle.styleName}"
-										itemValue="#{cssStyle.id}" >
-										</f:selectItems>
-										<f:ajax event="change" execute="@this" render="preview"/>
+										itemValue="#{cssStyle.id}">
+									</f:selectItems>
+									<f:ajax event="change" execute="@this" render="preview" />
 								</h:selectOneMenu>
-								<h:commandLink value="Preview" styleClass="btn" action="#{controller.loadById}">
-								<f:ajax execute="saved-border-radius-styles" render="preview"/>
-								</h:commandLink>
-								<h:commandLink value="Delete" styleClass="btn" action="#{controller.delete}">
-								<f:ajax execute="@this " render="saved-border-radius-styles preview msg"/>
+								 <h:commandLink value="Preview" styleClass="btn"
+									action="#{controller.loadById}">
+									<f:ajax execute="saved-border-radius-styles" render="preview" />
+								</h:commandLink> <h:commandLink value="Delete" styleClass="btn"
+									action="#{controller.delete}">
+									<f:ajax execute="@this "
+										render="saved-border-radius-styles preview msg" />
 								</h:commandLink>
 							</label>
 							<h:inputTextarea id="preview" value="#{controller.preview}"></h:inputTextarea>
 							<div>
-							<button id="myBtn" type="button" style="margin: 10px; 0px;"
-								class="btn btn-default btn-lg">Save</button>
-							<button type="button" style="margin: 10px; 0px"
-								class="back-btn btn btn-default btn-lg">Back</button>
+								<button id="myBtn" type="button" style="margin: 10px; 0px;"
+									class="btn btn-default btn-lg">Save</button>
+								<button type="button" style="margin: 10px; 0px"
+									class="back-btn btn btn-default btn-lg">Back</button>
 							</div>
 						</div>
 
@@ -164,7 +167,7 @@
 											<h:outputText style="text-align:right" value="Name" />
 										</div>
 										<div class="col-md-6">
-											<h:inputText id="input-name"
+											<h:inputText id="input-name-border"
 												value="#{controller.currentStyle.styleName}"
 												styleClass="ui-g-3" />
 										</div>
@@ -174,17 +177,17 @@
 										<div class="col-md-7" />
 										<div class="col-md-2">
 											<h:commandLink action="#{controller.save}"
-												style="margin-bottom:10px;" styleClass="btn btn-default clear"
-												value="OK">
-												<f:ajax execute="input-name" onevent="hideModal"
-													render="form:saved-border-radius-styles form:input-name form:msg" />
+												style="margin-bottom:10px;"
+												styleClass="btn btn-default clear" value="OK">
+												<f:ajax execute="input-name-border" onevent="hideModal"
+													render="form:saved-border-radius-styles form:input-name-border form:msg" />
 											</h:commandLink>
 										</div>
 										<div class="col-md-2">
 											<h:commandLink class="btn btn-default clear"
 												style="margin-bottom: 10px;" value="Back">
 												<f:ajax onevent="hideModal" execute="@this"
-													render="form:input-name msg" />
+													render="form:input-name-border msg" />
 											</h:commandLink>
 										</div>
 									</div>
@@ -226,20 +229,34 @@
 							class="box-shadow-input dynamic-input" /> </label>
 						<div id="box-shadow-code" class="code-area">
 							<textarea name="boxShadow-result-area" id="boxShadow-result-area"
-								style="width: 200px" class="result-area"></textarea>
-							<label>Saved styles: <h:selectOneMenu
+								 class="result-area"></textarea>
+							<label>Saved styles:
+							 <h:selectOneMenu
 									id="saved-box-shadow-styles"
-									value="#{controller.currentStyle.id}">
+									value="#{controller.currentStyle.id}" immediate="true"
+									valueChangeListener="#{controller.changeSelectedStyle}">
 									<f:selectItems value="#{controller.listOfCssStyles}"
 										var="cssStyle" itemLabel="#{cssStyle.styleName}"
-										itemValue="#{cssStyle.id}"></f:selectItems>
+										itemValue="#{cssStyle.id}">
+									</f:selectItems>
+										<f:ajax event="change" execute="@this" render="preview1" />
 								</h:selectOneMenu>
+								 <h:commandLink value="Preview" styleClass="btn"
+									action="#{controller.loadById}">
+									<f:ajax execute="saved-box-shadow-styles" render="preview1" />
+								</h:commandLink> <h:commandLink value="Delete" styleClass="btn"
+									action="#{controller.delete}">
+									<f:ajax execute="@this "
+										render="saved-box-shadow-styles preview msg" />
+								</h:commandLink>
 							</label>
+							<h:inputTextarea id="preview1" value="#{controller.preview}"/>
+							<div>
 							<button id="myBtn1" type="button" style="margin: 10px; 0px;"
 								class="btn btn-default btn-lg">Save</button>
 							<button type="button" style="margin: 10px; 0px"
 								class="back-btn btn btn-default btn-lg ">Back</button>
-
+							</div>
 						</div>
 						<!-- Modal -->
 						<div class="modal fade" id="myModal1" role="dialog">
@@ -256,7 +273,8 @@
 											<h:outputText style="text-align:right" value="Name" />
 										</div>
 										<div class="col-md-6">
-											<h:inputText value="#{controller.currentStyle.styleName}"
+											<h:inputText id="input-name-box"
+												value="#{controller.currentStyle.styleName}"
 												styleClass="ui-g-3">Name</h:inputText>
 										</div>
 									</div>
@@ -265,13 +283,20 @@
 										<div class="col-md-7" />
 										<div class="col-md-2">
 											<h:commandLink action="#{controller.save}"
-												style="margin-bottom:10px;" styleClass="btn btn-default "
-												value="OK" />
+												style="margin-bottom:10px;"
+												styleClass="btn btn-default clear" value="OK">
+												<f:ajax execute="input-name-box" onevent="hideModal1"
+													render="saved-box-shadow-styles input-name-box form:msg" />
+											</h:commandLink>
+
 										</div>
+										
 										<div class="col-md-2">
-											<h:commandLink action="#{controller.resetCSS}" value="Back"
-												class="btn btn-default" style="margin-bottom:10px;"
-												data-dismiss="modal" />
+												<h:commandLink class="btn btn-default clear"
+												style="margin-bottom: 10px;" value="Back">
+												<f:ajax onevent="hideModal1" execute="@this"
+													render="input-name-box msg" />
+											</h:commandLink>
 										</div>
 									</div>
 
@@ -296,8 +321,7 @@
 						<div id="text-shadow-code" class="code-area">
 							<pre id="text-shadow-result-area" class="result-area"></pre>
 							<button type="button" id="myBtn2" class="btn btn-default btn-lg ">Save</button>
-							<button type="button"
-								class="back-btn btn btn-default btn-lg ">Back</button>
+							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
 						</div>
 
 						<!-- Modal -->
@@ -354,8 +378,7 @@
 							<pre id="rgba-result-area" class="result-area"></pre>
 							<button type="button" id="myBtn3"
 								class="btn btn-default btn-lg save-btn">Save</button>
-							<button type="button"
-								class="back-btn btn btn-default btn-lg ">Back</button>
+							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
 						</div>
 
 						<!-- Modal -->
@@ -407,8 +430,7 @@
 							<pre id="font-face-result-area" class="result-area"></pre>
 							<button type="button" id="myBtn4"
 								class="btn btn-default btn-lg save-btn">Save</button>
-							<button type="button"
-								class="back-btn btn btn-default btn-lg ">Back</button>
+							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
 						</div>
 
 						<!-- Modal -->
@@ -461,8 +483,7 @@
 							<pre id="multiple-columns-result-area" class="code-area"></pre>
 							<button type="button" id="myBtn5"
 								class="btn btn-default btn-lg save-btn">Save</button>
-							<button type="button"
-								class="back-btn btn btn-default btn-lg ">Back</button>
+							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
 						</div>
 
 						<!-- Modal -->
@@ -515,8 +536,7 @@
 							<pre id="box-resize-result-area" class="result-area"></pre>
 							<button type="button" id="myBtn6"
 								class="btn btn-default btn-lg save-btn">Save</button>
-							<button type="button"
-								class="back-btn btn btn-default btn-lg ">Back</button>
+							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
 						</div>
 
 						<!-- Modal -->
@@ -581,8 +601,7 @@
 							<pre id="outline-result-area" class="result-area"></pre>
 							<button type="button" id="myBtn7"
 								class="btn btn-default btn-lg save-btn">Save</button>
-							<button type="button"
-								class="back-btn btn btn-default btn-lg ">Back</button>
+							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
 						</div>
 
 						<!-- Modal -->
@@ -653,8 +672,7 @@
 							<pre id="transition-result-area" class="result-area"></pre>
 							<button type="button" id="myBtn8"
 								class="btn btn-default btn-lg save-btn">Save</button>
-							<button type="button"
-								class="back-btn btn btn-default btn-lg ">Back</button>
+							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
 						</div>
 						<!-- Modal -->
 						<div class="modal fade" id="myModal8" role="dialog">
