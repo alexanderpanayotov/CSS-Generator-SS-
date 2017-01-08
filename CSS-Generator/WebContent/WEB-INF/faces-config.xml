@@ -5,4 +5,10 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
 
+
+<converter>
+    <converter-id>CssStyleConverter</converter-id>
+    <converter-class>com.cssgenerator.convertor.MyConverter</converter-class>
+</converter>
+
 </faces-config>

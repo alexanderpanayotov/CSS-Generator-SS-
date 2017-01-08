@@ -12,7 +12,10 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UICommand;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,53 +36,107 @@ public class MainBean implements Serializable {
 
 	private static final long serialVersionUID = -7182134510999986302L;
 
-	private CssStyle currentStyle = new CssStyle();
+	private CssStyle currentStyle = new CssStyle(); 
 	private List<CssStyle> listOfCssStyles;
 	private static final CssStyleDAO dao = new CssStyleDAO();
 	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Hibernate_JPA");
-	private String name;
-
+	private String currentType;
+	private String preview;
+	
 	public String getMessage() {
 		return "Hello World!";
 	}
 
-	public void resetCSS() {
+	public String resetCSS() {
 		currentStyle = new CssStyle();
-		name = "";
+		return null;
 	}
 	/*
 	 * @PostConstruct public void init() { EntityManager entitymanager =
 	 * emf.createEntityManager(); listOfCssStyles =
 	 * dao.loadAllStyles(entitymanager); }
 	 */
-
+	
+	public void changeSelectedStyle (ValueChangeEvent e){
+		EntityManager entityManager = emf.createEntityManager();
+		CssStyle temp;
+		Long id = (Long) e.getNewValue();
+		temp = dao.findById(entityManager, id);
+		preview = temp.getCss();
+	}
+	
+	public void loadById (){
+		EntityManager entityManager = emf.createEntityManager();
+		CssStyle temp;
+		try {
+			
+			temp = dao.findById(entityManager, currentStyle.getId());
+			preview = temp.getCss();
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Инфо:", "Успешно изтриване.");
+			addFacesContextMessage(message);
+		} catch (PersistenceException e) {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Инфо:", e.getMessage());
+			addFacesContextMessage(message);
+		}finally {
+			if (entityManager.isOpen()) {
+				entityManager.close();
+			}
+		}
+	}
+	
+	public void delete (){
+		EntityManager entityManager = emf.createEntityManager();
+		EntityTransaction transaction = null;
+		try {
+			transaction = entityManager.getTransaction();
+			transaction.begin();
+			dao.delete(entityManager, currentStyle.getId());
+			transaction.commit();
+			
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Инфо:", "Успешно изтриване.");
+			addFacesContextMessage(message);
+		} catch (PersistenceException e) {
+			if (transaction != null && transaction.isActive()) {
+				transaction.rollback();
+			}
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Инфо:", e.getMessage());
+			addFacesContextMessage(message);
+		}finally {
+			if (entityManager.isOpen()) {
+				entityManager.close();
+			}
+			loadByType(currentType);
+			currentStyle = new CssStyle();
+			preview = null;
+			
+		}
+	}
+	
 	public String save() {
-		EntityManager entitymanager = emf.createEntityManager();
+		EntityManager entityManager = emf.createEntityManager();
 		EntityTransaction transaction = null;
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 				.getRequest();
 
 		if (!request.getParameter("border-result-area").isEmpty()) {
-			currentStyle.setCss(request.getParameter("border-result-area"));
-			currentStyle.setType("border-radius");
+			getCurrentStyle().setCss(request.getParameter("border-result-area"));
+			getCurrentStyle().setType("border-radius");
 		} else if (!request.getParameter("boxShadow-result-area").isEmpty()) {
-			currentStyle.setCss(request.getParameter("boxShadow-result-area"));
-			currentStyle.setType("box-shadow");
+			getCurrentStyle().setCss(request.getParameter("boxShadow-result-area"));
+			getCurrentStyle().setType("box-shadow");
 		} else if (request.getParameter("boxShadow-result-area") != null) {
-			currentStyle.setCss(request.getParameter("border-result-area"));
-			currentStyle.setType("border-radius");
+			getCurrentStyle().setCss(request.getParameter("border-result-area"));
+			getCurrentStyle().setType("border-radius");
 		} else if (request.getParameter("boxShadow-result-area") != null) {
-			currentStyle.setCss(request.getParameter("border-result-area"));
-			currentStyle.setType("border-radius");
+			getCurrentStyle().setCss(request.getParameter("border-result-area"));
+			getCurrentStyle().setType("border-radius");
 		}
-		currentStyle.setStyleName(request.getParameter("name"));
 		
 		try {
-			transaction = entitymanager.getTransaction();
+			transaction = entityManager.getTransaction();
 			transaction.begin();
-			dao.save(getCurrentStyle(), entitymanager);
+			dao.save(getCurrentStyle(), entityManager);
 			transaction.commit();
-
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Инфо:", "Успешeн запис.");
 			addFacesContextMessage(message);
 		} catch (IllegalArgumentException e) {
@@ -97,50 +154,44 @@ public class MainBean implements Serializable {
 			e.printStackTrace();
 
 		} finally {
-			if (entitymanager.isOpen()) {
-				entitymanager.close();
+			if (entityManager.isOpen()) {
+				entityManager.close();
 			}
+			loadByType(currentType);
 			currentStyle = new CssStyle();
-			name = "";
 		}
+		
 		return null;
 	}
 
 	public String load() {
 
-		EntityManager entitymanager = emf.createEntityManager();
+		EntityManager entityManager = emf.createEntityManager();
 		try {
-			setListOfCssStyles(dao.loadAllStyles(entitymanager));
+			setListOfCssStyles(dao.loadAllStyles(entityManager));
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 		} finally {
-			entitymanager.close();
+			entityManager.close();
 		}
 		return null;
 	}
 
 	public void loadByType(String type) {
-		EntityManager entitymanager = emf.createEntityManager();
+		EntityManager entityManager = emf.createEntityManager();
+		currentType = type;
 		try {
-			setListOfCssStyles(dao.loadStyleByType(entitymanager, type));
+			setListOfCssStyles(dao.loadStyleByType(entityManager, type));
 		} catch (PersistenceException e) {
 			e.printStackTrace();
 		} finally {
-			entitymanager.close();
+			entityManager.close();
 		}
 	}
 
 	public void addFacesContextMessage(FacesMessage message) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, message);
-	}
-
-	public CssStyle getCurrentStyle() {
-		return currentStyle;
-	}
-
-	public void setCurrentStyle(CssStyle currentStyle) {
-		this.currentStyle = currentStyle;
 	}
 
 	public List<CssStyle> getListOfCssStyles() {
@@ -151,12 +202,29 @@ public class MainBean implements Serializable {
 		this.listOfCssStyles = listOfCssStyles;
 	}
 
-	public String getName() {
-		return name;
+
+	public CssStyle getCurrentStyle() {
+		return currentStyle;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCurrentStyle(CssStyle currentStyle) {
+		this.currentStyle = currentStyle;
+	}
+
+	public String getCurrentType() {
+		return currentType;
+	}
+
+	public void setCurrentType(String currentType) {
+		this.currentType = currentType;
+	}
+
+	public String getPreview() {
+		return preview;
+	}
+
+	public void setPreview(String preview) {
+		this.preview = preview;
 	}
 
 }

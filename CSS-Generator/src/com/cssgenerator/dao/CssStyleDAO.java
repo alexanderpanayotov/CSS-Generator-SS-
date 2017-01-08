@@ -19,7 +19,28 @@ import org.hibernate.event.spi.SaveOrUpdateEvent;
 import com.cssgenerator.entities.CssStyle;
 
 public class CssStyleDAO {
-
+	
+	public void delete(EntityManager entityManager, Long id){
+		CssStyle object;
+		try {
+			object = findById(entityManager,id);
+			if (object != null) {
+				entityManager.remove(object);
+			}
+		} catch (PersistenceException e) {
+			throw new PersistenceException("Грешка при изтриване от базата", e);
+		}
+	}
+	public CssStyle findById(EntityManager entityManager, Long id) throws PersistenceException {
+		CssStyle result;
+		try {
+			result = entityManager.find(CssStyle.class, id);
+		} catch (PersistenceException e) {
+			throw new PersistenceException("Грешка при четене от базата", e);
+		}
+		return result;
+	}
+	
 	public void save(CssStyle css, EntityManager entitymanager)
 			throws PersistenceException, IllegalArgumentException {
 

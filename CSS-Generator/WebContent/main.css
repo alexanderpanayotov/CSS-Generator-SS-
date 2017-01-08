@@ -283,3 +283,7 @@ label span {
 .hidden {
 	display: none !important;
 }
+textarea {
+  resize: none;
+  margin: 20px 0px;
+}	

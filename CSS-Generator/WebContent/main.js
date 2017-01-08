@@ -1,4 +1,5 @@
- var $cssButtons=$(".btn-block");
+
+var $cssButtons=$(".btn-block");
  var result={
    topRight:"",
    topLeft :"",
@@ -201,12 +202,12 @@ PrintBoxShadow();
   }
   });
   
-/*$(".back-btn").on("click",function() {
+$(".back-btn").on("click",function() {
 
   $cssButtons.css("visibility","initial");
   $(".interaction-area").css("visibility","hidden");
 });
-*/
+
 $(".text-shadow-input").on("input",function(){
 var $this=$(this);
 
@@ -414,8 +415,16 @@ if ($this.val()=="Transform") {
 $cssButtons.css("visibility","hidden");
 });
 */
+
+//$(document).ready(function () {
+//    $(".back-btn").click(function () {
+//        $("input[type=text]").val("");
+//        $("textarea").val("");
+//    });
+//});
+
  function showBorderRadius() {
-	$("#border-radius").css("visibility","visible");
+	$("#border-radius").css("visibility","initial");
 	$cssButtons.css("visibility","hidden");
 }
 function showBoxShadow() {
@@ -427,7 +436,6 @@ function showBoxShadow() {
 	  $cssButtons.css("visibility","visible");
 	  $(".interaction-area").css("visibility","hidden");
 	});
-function confirmSave() {
-	$cssButtons.css("visibility","visible");
-	  $(".interaction-area").css("visibility","hidden");
+function hideModal (){
+	$("#myModal").modal("hide");
 }

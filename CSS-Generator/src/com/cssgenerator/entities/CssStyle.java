@@ -48,5 +48,14 @@ public class CssStyle implements Serializable {
 	public String toString() {
 		return "CssStyle [id=" + id + ", type=" + type + ", styleName=" + styleName + ", css=" + css + "]";
 	}
+	@Override
+	public boolean equals(Object other) {
+		 return other instanceof CssStyle && (id != null) ? id.equals(((CssStyle) other).id) : (other == this);
+	}
+	@Override
+	public int hashCode() {
+		return id != null ? this.getClass().hashCode() + id.hashCode() : super.hashCode();
+	}
+	
 	
 }

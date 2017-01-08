@@ -27,28 +27,30 @@
 			<h:messages id="msg" showDetail="true" showSummary="true"
 				style="text-align:center; margin-left:75%" />
 
-			<div class="form-group">
-				<label for=""></label>
-				<div>
-					<img id="css" src="CSS.png" class="img-responsive css-photo"
-						alt="Css3 photo" width="280" height="100" align="right" />
-				</div>
-				<h:commandLink type="button" value="Border Radius"
-					action="#{controller.loadByType('border-radius')}"
-					class="btn btn-primary btn-lg btn-block btn-success" >
-					<f:ajax onevent="showBorderRadius" execute="form" render="saved-border-radius-styles"></f:ajax>
-					</h:commandLink>
-
-			</div>
 			<div class="btn-category">
+				<div class="form-group">
+					<label for=""></label>
+					<div>
+						<img id="css" src="CSS.png" class="img-responsive css-photo"
+							alt="Css3 photo" width="280" height="100" align="right" />
+					</div>
+					<h:commandLink type="button" value="Border Radius"
+						action="#{controller.loadByType('border-radius')}"
+						class="btn btn-primary btn-lg btn-block btn-success">
+						<f:ajax onevent="showBorderRadius" execute="form"
+							render="saved-border-radius-styles msg"></f:ajax>
+					</h:commandLink>
+				</div>
+
 				<div class="form-group">
 					<label for=""></label>
 					<h:commandLink type="button" id="btn-box-shadow"
 						action="#{controller.loadByType('box-shadow')}"
 						styleClass="btn btn-primary btn-lg btn-block btn-success"
-						value="Box Shadow" >
-						<f:ajax onevent="showBoxShadow" execute="form" render="saved-box-shadow-styles"></f:ajax>
-						</h:commandLink>
+						value="Box Shadow">
+						<f:ajax onevent="showBoxShadow" execute="form"
+							render="saved-box-shadow-styles"></f:ajax>
+					</h:commandLink>
 				</div>
 
 				<div class="form-group">
@@ -106,7 +108,7 @@
 				</div>
 			</div>
 
-			<div class="main-area">
+			<div id="main" class="main-area">
 				<div id="interaction-area-main" class="interaction-area">
 
 					<div id="border-radius" class="interaction-area">
@@ -122,21 +124,125 @@
 						<div id="border-radius-code" class="code-area">
 							<textarea name="border-result-area" id="border-result-area"
 								class="result-area" />
-							<label>Saved styles: <h:selectOneMenu id="saved-border-radius-styles" 
-									value="#{controller.currentStyle.id}">
-									<f:selectItems  value="#{controller.listOfCssStyles}"
+							<label>Saved styles: <h:selectOneMenu
+									id="saved-border-radius-styles"
+									value="#{controller.currentStyle.id}" immediate="true" valueChangeListener="#{controller.changeSelectedStyle}">
+									<f:selectItems value="#{controller.listOfCssStyles}"
 										var="cssStyle" itemLabel="#{cssStyle.styleName}"
-										itemValue="#{cssStyle.id}"></f:selectItems>
+										itemValue="#{cssStyle.id}" >
+										</f:selectItems>
+										<f:ajax event="change" execute="@this" render="preview"/>
 								</h:selectOneMenu>
+								<h:commandLink value="Preview" styleClass="btn" action="#{controller.loadById}">
+								<f:ajax execute="saved-border-radius-styles" render="preview"/>
+								</h:commandLink>
+								<h:commandLink value="Delete" styleClass="btn" action="#{controller.delete}">
+								<f:ajax execute="@this " render="saved-border-radius-styles preview msg"/>
+								</h:commandLink>
 							</label>
+							<h:inputTextarea id="preview" value="#{controller.preview}"></h:inputTextarea>
+							<div>
 							<button id="myBtn" type="button" style="margin: 10px; 0px;"
 								class="btn btn-default btn-lg">Save</button>
 							<button type="button" style="margin: 10px; 0px"
-								class="back-btn btn btn-default btn-lg back-btn">Back</button>
+								class="back-btn btn btn-default btn-lg">Back</button>
+							</div>
 						</div>
 
 						<!-- Modal -->
 						<div class="modal fade" id="myModal" role="dialog">
+							<div class="modal-dialog">
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">×</button>
+										<h4 class="modal-title">Confirm save</h4>
+									</div>
+									<div class="modal-body row">
+										<div class="col-md-1"></div>
+										<div class="col-md-1">
+											<h:outputText style="text-align:right" value="Name" />
+										</div>
+										<div class="col-md-6">
+											<h:inputText id="input-name"
+												value="#{controller.currentStyle.styleName}"
+												styleClass="ui-g-3" />
+										</div>
+									</div>
+									<br />
+									<div class="row">
+										<div class="col-md-7" />
+										<div class="col-md-2">
+											<h:commandLink action="#{controller.save}"
+												style="margin-bottom:10px;" styleClass="btn btn-default clear"
+												value="OK">
+												<f:ajax execute="input-name" onevent="hideModal"
+													render="form:saved-border-radius-styles form:input-name form:msg" />
+											</h:commandLink>
+										</div>
+										<div class="col-md-2">
+											<h:commandLink class="btn btn-default clear"
+												style="margin-bottom: 10px;" value="Back">
+												<f:ajax onevent="hideModal" execute="@this"
+													render="form:input-name msg" />
+											</h:commandLink>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div id="box-shadow" class="interaction-area">
+						<label> <span>Inset:</span> <select tabindex="5"
+							id="box-shadow-inset">
+								<option value="No">No</option>
+								<option value="Inset">Inset</option>
+						</select></label> <label> <span>Horizontal Length:</span> <input
+							tabindex="6" type="text" size="2"
+							class="box-shadow-input dynamic-input" /><i>px</i>
+						</label> <label> <span>Vertical Length:</span> <input tabindex="7"
+							type="text" class="box-shadow-input dynamic-input" size="2" /><i>px</i></label>
+						<label><span>Blur Radius:</span> <input tabindex="8"
+							type="text" size="2" class="box-shadow-input dynamic-input" /><i>px</i></label>
+						<label><span>Spread:</span> <input tabindex="9"
+							type="text" size="2" class="box-shadow-input dynamic-input" /><i>px</i></label>
+						<label> <span>Color Type:</span> <select tabindex="10"
+							id="box-shadow-color" class="dynamic-input">
+								<option value="undefined"></option>
+								<option value="rgba">RGBA</option>
+								<option value="hex">Hex</option>
+						</select></label> <label class="hidden"> <span>RGBA Color:</span> <input
+							tabindex="11" name="box-shadow-r" type="text" size="3"
+							class="box-shadow-input dynamic-input" />,<input tabindex="12"
+							type="text" size="3" class="box-shadow-input dynamic-input" />,<input
+							tabindex="13" type="text" size="3"
+							class="box-shadow-input dynamic-input" />,<input tabindex="14"
+							type="text" size="3" class="box-shadow-input dynamic-input" /></label> <label
+							class="hidden"><span>Hex Color:</span> <input
+							tabindex="15" type="text" size="5"
+							class="box-shadow-input dynamic-input" /> </label>
+						<div id="box-shadow-code" class="code-area">
+							<textarea name="boxShadow-result-area" id="boxShadow-result-area"
+								style="width: 200px" class="result-area"></textarea>
+							<label>Saved styles: <h:selectOneMenu
+									id="saved-box-shadow-styles"
+									value="#{controller.currentStyle.id}">
+									<f:selectItems value="#{controller.listOfCssStyles}"
+										var="cssStyle" itemLabel="#{cssStyle.styleName}"
+										itemValue="#{cssStyle.id}"></f:selectItems>
+								</h:selectOneMenu>
+							</label>
+							<button id="myBtn1" type="button" style="margin: 10px; 0px;"
+								class="btn btn-default btn-lg">Save</button>
+							<button type="button" style="margin: 10px; 0px"
+								class="back-btn btn btn-default btn-lg ">Back</button>
+
+						</div>
+						<!-- Modal -->
+						<div class="modal fade" id="myModal1" role="dialog">
 							<div class="modal-dialog">
 								<!-- Modal content-->
 								<div class="modal-content">
@@ -174,92 +280,6 @@
 						</div>
 
 					</div>
-					
-					<div id="box-shadow" class="interaction-area">
-						<label> <span>Inset:</span> <select tabindex="5"
-							id="box-shadow-inset">
-								<option value="No">No</option>
-								<option value="Inset">Inset</option>
-						</select></label> <label> <span>Horizontal Length:</span> <input
-							tabindex="6" type="text" size="2"
-							class="box-shadow-input dynamic-input" /><i>px</i>
-						</label> <label> <span>Vertical Length:</span> <input tabindex="7"
-							type="text" class="box-shadow-input dynamic-input" size="2" /><i>px</i></label>
-						<label><span>Blur Radius:</span> <input tabindex="8"
-							type="text" size="2" class="box-shadow-input dynamic-input" /><i>px</i></label>
-						<label><span>Spread:</span> <input tabindex="9"
-							type="text" size="2" class="box-shadow-input dynamic-input" /><i>px</i></label>
-						<label> <span>Color Type:</span> <select tabindex="10"
-							id="box-shadow-color" class="dynamic-input">
-								<option value="undefined"></option>
-								<option value="rgba">RGBA</option>
-								<option value="hex">Hex</option>
-						</select></label> <label class="hidden"> <span>RGBA Color:</span> <input
-							tabindex="11" name="box-shadow-r" type="text" size="3"
-							class="box-shadow-input dynamic-input" />,<input tabindex="12"
-							type="text" size="3" class="box-shadow-input dynamic-input" />,<input
-							tabindex="13" type="text" size="3"
-							class="box-shadow-input dynamic-input" />,<input tabindex="14"
-							type="text" size="3" class="box-shadow-input dynamic-input" /></label> <label
-							class="hidden"><span>Hex Color:</span> <input
-							tabindex="15" type="text" size="5"
-							class="box-shadow-input dynamic-input" /> </label>
-						<div id="box-shadow-code" class="code-area">
-							<textarea name="boxShadow-result-area" id="boxShadow-result-area"
-								style="width: 200px" class="result-area"></textarea>
-							<label>Saved styles: 
-							<h:selectOneMenu id="saved-box-shadow-styles" 
-									value="#{controller.currentStyle.id}">
-									<f:selectItems value="#{controller.listOfCssStyles}"
-										var="cssStyle" itemLabel="#{cssStyle.styleName}"
-										itemValue="#{cssStyle.id}"></f:selectItems>
-								</h:selectOneMenu>
-							</label>
-							<button id="myBtn1" type="button" style="margin: 10px; 0px;"
-								class="btn btn-default btn-lg">Save</button>
-							<button type="button" style="margin: 10px; 0px"
-								class="back-btn btn btn-default btn-lg back-btn">Back</button>
-
-						</div>
-						<!-- Modal -->
-						<div class="modal fade" id="myModal1" role="dialog">
-							<div class="modal-dialog">
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">×</button>
-										<h4 class="modal-title">Confirm save</h4>
-									</div>
-									<div class="modal-body row">
-										<div class="col-md-1"></div>
-										<div class="col-md-1">
-											<h:outputText style="text-align:right" value="Name" />
-										</div>
-										<div class="col-md-6">
-											<h:inputText value="#{controller.name}"
-												styleClass="ui-g-3">Name</h:inputText>
-										</div>
-									</div>
-									<br />
-									<div class="row">
-										<div class="col-md-7" />
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.save}"
-												style="margin-bottom:10px;" styleClass="btn btn-default "
-												value="OK" />
-										</div>
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.resetCSS}" value="Back"
-												class="btn btn-default" style="margin-bottom:10px;"
-												data-dismiss="modal" />
-										</div>
-									</div>
-
-								</div>
-							</div>	
-						</div>
-
-					</div>
 
 					<div id="text-shadow" class="interaction-area">
 						<label> <span>Horizontal Length:</span> <input
@@ -277,7 +297,7 @@
 							<pre id="text-shadow-result-area" class="result-area"></pre>
 							<button type="button" id="myBtn2" class="btn btn-default btn-lg ">Save</button>
 							<button type="button"
-								class="back-btn btn btn-default btn-lg back-btn">Back</button>
+								class="back-btn btn btn-default btn-lg ">Back</button>
 						</div>
 
 						<!-- Modal -->
@@ -335,7 +355,7 @@
 							<button type="button" id="myBtn3"
 								class="btn btn-default btn-lg save-btn">Save</button>
 							<button type="button"
-								class="back-btn btn btn-default btn-lg back-btn">Back</button>
+								class="back-btn btn btn-default btn-lg ">Back</button>
 						</div>
 
 						<!-- Modal -->
@@ -388,7 +408,7 @@
 							<button type="button" id="myBtn4"
 								class="btn btn-default btn-lg save-btn">Save</button>
 							<button type="button"
-								class="back-btn btn btn-default btn-lg back-btn">Back</button>
+								class="back-btn btn btn-default btn-lg ">Back</button>
 						</div>
 
 						<!-- Modal -->
@@ -442,7 +462,7 @@
 							<button type="button" id="myBtn5"
 								class="btn btn-default btn-lg save-btn">Save</button>
 							<button type="button"
-								class="back-btn btn btn-default btn-lg back-btn">Back</button>
+								class="back-btn btn btn-default btn-lg ">Back</button>
 						</div>
 
 						<!-- Modal -->
@@ -496,7 +516,7 @@
 							<button type="button" id="myBtn6"
 								class="btn btn-default btn-lg save-btn">Save</button>
 							<button type="button"
-								class="back-btn btn btn-default btn-lg back-btn">Back</button>
+								class="back-btn btn btn-default btn-lg ">Back</button>
 						</div>
 
 						<!-- Modal -->
@@ -562,7 +582,7 @@
 							<button type="button" id="myBtn7"
 								class="btn btn-default btn-lg save-btn">Save</button>
 							<button type="button"
-								class="back-btn btn btn-default btn-lg back-btn">Back</button>
+								class="back-btn btn btn-default btn-lg ">Back</button>
 						</div>
 
 						<!-- Modal -->
@@ -634,7 +654,7 @@
 							<button type="button" id="myBtn8"
 								class="btn btn-default btn-lg save-btn">Save</button>
 							<button type="button"
-								class="back-btn btn btn-default btn-lg back-btn">Back</button>
+								class="back-btn btn btn-default btn-lg ">Back</button>
 						</div>
 						<!-- Modal -->
 						<div class="modal fade" id="myModal8" role="dialog">
