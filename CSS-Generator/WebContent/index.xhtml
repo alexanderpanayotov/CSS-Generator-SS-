@@ -37,45 +37,55 @@
 					<h:commandLink type="button" value="Border Radius"
 						action="#{controller.loadByType('border-radius')}"
 						class="btn btn-primary btn-lg btn-block btn-success">
-						<f:ajax onevent="showBorderRadius" execute="form"
+						<f:ajax onevent="showBorderRadius" execute="@this"
 							render="saved-border-radius-styles msg"></f:ajax>
 					</h:commandLink>
 				</div>
-
 				<div class="form-group">
 					<label for=""></label>
 					<h:commandLink type="button" value="Box Shadow"
 						action="#{controller.loadByType('box-shadow')}"
 						styleClass="btn btn-primary btn-lg btn-block btn-success">
-						<f:ajax onevent="showBoxShadow" execute="form"
+						<f:ajax onevent="showBoxShadow" execute="@this"
 							render="saved-box-shadow-styles msg"></f:ajax>
 					</h:commandLink>
 				</div>
+				<div class="form-group">
+					<label for=""></label>
+					<h:commandLink type="button" value="Text Shadow"
+						action="#{controller.loadByType('text-shadow')}"
+						styleClass="btn btn-primary btn-lg btn-block btn-success">
+						<f:ajax onevent="showTextShadow" execute="@this"
+							render="saved-text-shadow-styles msg"></f:ajax>
+					</h:commandLink>
+				</div>
+				<div class="form-group">
+					<label for=""></label>
+					<h:commandLink type="button" value="RGBA"
+					action="#{controller.loadByType('rgba')}"
+						styleClass="btn btn-primary btn-lg btn-block btn-success">
+						<f:ajax onevent="showRGBA" execute="@this"
+							render="saved-rgba-styles msg"></f:ajax>
+						</h:commandLink>
+				</div>
+				<div class="form-group">
+					<label for=""></label>
+					<h:commandLink type="button" value="Font Face"
+					action="#{controller.loadByType('font-face')}"
+						styleClass="btn btn-primary btn-lg btn-block btn-success" >
+						<f:ajax onevent="showFontFace" execute="@this"
+							render="saved-font-face-styles msg"></f:ajax>
+						</h:commandLink>
+				</div>
+				<div class="form-group">
 
-				<div class="form-group">
 					<label for=""></label>
-					<h:commandButton type="button" id="btn-text-shadow"
-						styleClass="btn btn-primary btn-lg btn-block btn-success"
-						value="Text Shadow" />
-				</div>
-				<div class="form-group">
-					<label for=""></label>
-					<h:commandButton type="button" id="btn-rgba"
-						styleClass="btn btn-primary btn-lg btn-block btn-success"
-						value="RGBA" />
-				</div>
-				<div class="form-group">
-					<label for=""></label>
-					<h:commandButton type="button"
-						styleClass="btn btn-primary btn-lg btn-block btn-success"
-						value="Font Face" />
-				</div>
-				<div class="form-group">
-
-					<label for=""></label>
-					<h:commandButton type="button" id="btn-multiple-columns"
-						styleClass="btn btn-primary btn-lg btn-block btn-success"
-						value="Multiple Colums" />
+					<h:commandLink type="button" value="Multiple Colums" 
+						action="#{controller.loadByType('multiple-columns')}"
+						styleClass="btn btn-primary btn-lg btn-block btn-success">
+						<f:ajax onevent="showMultipleColumns" execute="@this"
+							render="saved-font-face-styles msg"></f:ajax>
+						</h:commandLink>
 				</div>
 				<div>
 					<img id="html" src="HTML.png" class="img-responsive photo-html"
@@ -126,18 +136,15 @@
 							<label>Saved styles: 
 							<h:selectOneMenu
 									id="saved-border-radius-styles"
-									value="#{controller.currentStyle.id}" immediate="true"
+									value="#{controller.selectedId}" immediate="true"
 									valueChangeListener="#{controller.changeSelectedStyle}">
 									<f:selectItems value="#{controller.listOfCssStyles}"
 										var="cssStyle" itemLabel="#{cssStyle.styleName}"
 										itemValue="#{cssStyle.id}">
 									</f:selectItems>
-									<f:ajax event="change" execute="@this" render="preview" />
+									<f:ajax event="click" execute="@this" render="preview" />
 								</h:selectOneMenu>
-								 <h:commandLink value="Preview" styleClass="btn"
-									action="#{controller.loadById}">
-									<f:ajax execute="saved-border-radius-styles" render="preview" />
-								</h:commandLink> <h:commandLink value="Delete" styleClass="btn"
+								 <h:commandLink value="Delete" styleClass="btn"
 									action="#{controller.delete}">
 									<f:ajax execute="@this "
 										render="saved-border-radius-styles preview msg" />
@@ -145,59 +152,14 @@
 							</label>
 							<h:inputTextarea id="preview" value="#{controller.preview}"></h:inputTextarea>
 							<div>
-								<button id="myBtn" type="button" style="margin: 10px; 0px;"
-									class="btn btn-default btn-lg">Save</button>
+								<button type="button" style="margin: 10px; 0px;"
+									class="btn btn-default btn-lg show-modal">Save</button>
 								<button type="button" style="margin: 10px; 0px"
 									class="back-btn btn btn-default btn-lg">Back</button>
 							</div>
 						</div>
 
-						<!-- Modal -->
-						<div class="modal fade" id="myModal" role="dialog">
-							<div class="modal-dialog">
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">×</button>
-										<h4 class="modal-title">Confirm save</h4>
-									</div>
-									<div class="modal-body row">
-										<div class="col-md-1"></div>
-										<div class="col-md-1">
-											<h:outputText style="text-align:right" value="Name" />
-										</div>
-										<div class="col-md-6">
-											<h:inputText id="input-name-border"
-												value="#{controller.currentStyle.styleName}"
-												styleClass="ui-g-3" />
-										</div>
-									</div>
-									<br />
-									<div class="row">
-										<div class="col-md-7" />
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.save}"
-												style="margin-bottom:10px;"
-												styleClass="btn btn-default clear" value="OK">
-												<f:ajax execute="input-name-border" onevent="hideModal"
-													render="form:saved-border-radius-styles form:input-name-border form:msg" />
-											</h:commandLink>
-										</div>
-										<div class="col-md-2">
-											<h:commandLink class="btn btn-default clear"
-												style="margin-bottom: 10px;" value="Back">
-												<f:ajax onevent="hideModal" execute="@this"
-													render="form:input-name-border msg" />
-											</h:commandLink>
-										</div>
-									</div>
-
-								</div>
-							</div>
-						</div>
-
 					</div>
-
 					<div id="box-shadow" class="interaction-area">
 						<label> <span>Inset:</span> <select tabindex="5"
 							id="box-shadow-inset">
@@ -229,83 +191,33 @@
 							class="box-shadow-input dynamic-input" /> </label>
 						<div id="box-shadow-code" class="code-area">
 							<textarea name="boxShadow-result-area" id="boxShadow-result-area"
-								 class="result-area"></textarea>
+								class="result-area"></textarea>
 							<label>Saved styles:
 							 <h:selectOneMenu
-									id="saved-box-shadow-styles"
-									value="#{controller.currentStyle.id}" immediate="true"
+									id="saved-box-shadow-styles" value="#{controller.selectedId}"
+									immediate="true"
 									valueChangeListener="#{controller.changeSelectedStyle}">
-									<f:selectItems value="#{controller.listOfCssStyles}"
-										var="cssStyle" itemLabel="#{cssStyle.styleName}"
-										itemValue="#{cssStyle.id}">
+									<f:selectItems 
+										value="#{controller.listOfCssStyles}" var="cssStyle"
+										itemLabel="#{cssStyle.styleName}" itemValue="#{cssStyle.id}">
 									</f:selectItems>
-										<f:ajax event="change" execute="@this" render="preview1" />
+									<f:ajax event="click" execute="@this" render="preview1" />
 								</h:selectOneMenu>
-								 <h:commandLink value="Preview" styleClass="btn"
-									action="#{controller.loadById}">
-									<f:ajax execute="saved-box-shadow-styles" render="preview1" />
-								</h:commandLink> <h:commandLink value="Delete" styleClass="btn"
+								 <h:commandLink value="Delete" styleClass="btn"
 									action="#{controller.delete}">
 									<f:ajax execute="@this "
-										render="saved-box-shadow-styles preview msg" />
+										render="saved-box-shadow-styles preview1 msg" />
 								</h:commandLink>
 							</label>
-							<h:inputTextarea id="preview1" value="#{controller.preview}"/>
+							<h:inputTextarea id="preview1" value="#{controller.preview}" />
 							<div>
-							<button id="myBtn1" type="button" style="margin: 10px; 0px;"
-								class="btn btn-default btn-lg">Save</button>
-							<button type="button" style="margin: 10px; 0px"
-								class="back-btn btn btn-default btn-lg ">Back</button>
+								<button type="button" style="margin: 10px; 0px;"
+									class="btn btn-default btn-lg show-modal">Save</button>
+								<button type="button" style="margin: 10px; 0px"
+									class="back-btn btn btn-default btn-lg ">Back</button>
 							</div>
 						</div>
-						<!-- Modal -->
-						<div class="modal fade" id="myModal1" role="dialog">
-							<div class="modal-dialog">
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">×</button>
-										<h4 class="modal-title">Confirm save</h4>
-									</div>
-									<div class="modal-body row">
-										<div class="col-md-1"></div>
-										<div class="col-md-1">
-											<h:outputText style="text-align:right" value="Name" />
-										</div>
-										<div class="col-md-6">
-											<h:inputText id="input-name-box"
-												value="#{controller.currentStyle.styleName}"
-												styleClass="ui-g-3">Name</h:inputText>
-										</div>
-									</div>
-									<br />
-									<div class="row">
-										<div class="col-md-7" />
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.save}"
-												style="margin-bottom:10px;"
-												styleClass="btn btn-default clear" value="OK">
-												<f:ajax execute="input-name-box" onevent="hideModal1"
-													render="saved-box-shadow-styles input-name-box form:msg" />
-											</h:commandLink>
-
-										</div>
-										
-										<div class="col-md-2">
-												<h:commandLink class="btn btn-default clear"
-												style="margin-bottom: 10px;" value="Back">
-												<f:ajax onevent="hideModal1" execute="@this"
-													render="input-name-box msg" />
-											</h:commandLink>
-										</div>
-									</div>
-
-								</div>
-							</div>
-						</div>
-
 					</div>
-
 					<div id="text-shadow" class="interaction-area">
 						<label> <span>Horizontal Length:</span> <input
 							tabindex="16" type="text" size="2"
@@ -319,50 +231,34 @@
 							type="text" size="5" class="text-shadow-input dynamic-input" />
 						</label>
 						<div id="text-shadow-code" class="code-area">
-							<pre id="text-shadow-result-area" class="result-area"></pre>
-							<button type="button" id="myBtn2" class="btn btn-default btn-lg ">Save</button>
-							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
-						</div>
-
-						<!-- Modal -->
-						<div class="modal fade" id="myModal2" role="dialog">
-							<div class="modal-dialog">
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">×</button>
-										<h4 class="modal-title">Confirm save</h4>
-									</div>
-									<div class="modal-body row">
-										<div class="col-md-1"></div>
-										<div class="col-md-1">
-											<h:outputText style="text-align:right" value="Name" />
-										</div>
-										<div class="col-md-6">
-											<h:inputText value="#{controller.currentStyle.styleName}"
-												styleClass="ui-g-3">Name</h:inputText>
-										</div>
-									</div>
-									<br />
-									<div class="row">
-										<div class="col-md-7" />
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.save}"
-												style="margin-bottom:10px;" styleClass="btn btn-default "
-												value="OK" />
-										</div>
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.resetCSS}" value="Back"
-												class="btn btn-default" style="margin-bottom:10px;"
-												data-dismiss="modal" />
-										</div>
-									</div>
-								</div>
+							<textarea name="text-shadow-result-area"
+								id="text-shadow-result-area" class="result-area"></textarea>
+							<label>Saved styles: <h:selectOneMenu
+									id="saved-text-shadow-styles" value="#{controller.selectedId}"
+									immediate="true"
+									valueChangeListener="#{controller.changeSelectedStyle}">
+									<f:selectItems 
+										value="#{controller.listOfCssStyles}" var="cssStyle"
+										itemLabel="#{cssStyle.styleName}" itemValue="#{cssStyle.id}">
+									</f:selectItems>
+									<f:ajax event="click" execute="@this" render="preview2" />
+								</h:selectOneMenu>
+								 <h:commandLink value="Delete" styleClass="btn"
+									action="#{controller.delete}">
+									<f:ajax execute="@this "
+										render="saved-text-shadow-styles preview msg" />
+								</h:commandLink>
+							</label>
+							<h:inputTextarea id="preview2" value="#{controller.preview}" />
+							<div>
+								<button type="button" style="margin: 10px; 0px;"
+									class="btn btn-default btn-lg show-modal">Save</button>
+								<button type="button" style="margin: 10px; 0px"
+									class="back-btn btn btn-default btn-lg ">Back</button>
 							</div>
 						</div>
 
 					</div>
-
 					<div id="rgba" class="interaction-area">
 						<label> <span>R:</span> <input tabindex="20" name="rgba-r"
 							type="text" size="2" class="rgba-input dynamic-input" />
@@ -375,51 +271,33 @@
 							type="text" size="2" class="rgba-input dynamic-input" /></label>
 
 						<div id="rgba-code" class="code-area">
-							<pre id="rgba-result-area" class="result-area"></pre>
-							<button type="button" id="myBtn3"
-								class="btn btn-default btn-lg save-btn">Save</button>
-							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
-						</div>
-
-						<!-- Modal -->
-						<div class="modal fade" id="myModal3" role="dialog">
-							<div class="modal-dialog">
-
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">×</button>
-										<h4 class="modal-title">Confirm save</h4>
-									</div>
-									<div class="modal-body row">
-										<div class="col-md-1"></div>
-										<div class="col-md-1">
-											<h:outputText style="text-align:right" value="Name" />
-										</div>
-										<div class="col-md-6">
-											<h:inputText value="#{controller.currentStyle.styleName}"
-												styleClass="ui-g-3">Name</h:inputText>
-										</div>
-									</div>
-									<br />
-									<div class="row">
-										<div class="col-md-7" />
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.save}"
-												style="margin-bottom:10px;" styleClass="btn btn-default "
-												value="OK" />
-										</div>
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.resetCSS}" value="Back"
-												class="btn btn-default" style="margin-bottom:10px;"
-												data-dismiss="modal" />
-										</div>
-									</div>
-								</div>
+							<textarea name="rgba-result-area" id="rgba-result-area" class="result-area"></textarea>
+							<label>Saved styles:
+							 <h:selectOneMenu
+									id="saved-rgba-styles" value="#{controller.selectedId}"
+									immediate="true" valueChangeListener="#{controller.changeSelectedStyle}">
+									<f:selectItems 
+										value="#{controller.listOfCssStyles}" var="cssStyle"
+										itemLabel="#{cssStyle.styleName}" itemValue="#{cssStyle.id}">
+									</f:selectItems>
+									<f:ajax event="click" execute="@this" render="preview3" />
+								</h:selectOneMenu>
+								 <h:commandLink value="Delete" styleClass="btn"
+									action="#{controller.delete}">
+									<f:ajax execute="@this "
+										render="saved-rgba-styles preview3 msg" />
+									</h:commandLink>
+							</label>
+							<h:inputTextarea id="preview3" value="#{controller.preview}" />
+							<div>
+								<button type="button" style="margin: 10px; 0px;"
+									class="btn btn-default btn-lg show-modal">Save</button>
+								<button type="button" style="margin: 10px; 0px"
+									class="back-btn btn btn-default btn-lg ">Back</button>
 							</div>
 						</div>
-
 					</div>
+					
 					<div id="font-face" class="interaction-area">
 						<label> <span>Font Family:</span> <input tabindex="24"
 							type="text" size="10" class="font-face-input dynamic-input" />
@@ -427,46 +305,29 @@
 							name="font-face-name" type="text" size="10"
 							class="font-face-input dynamic-input" /></label>
 						<div id="font-face-code" class="code-area">
-							<pre id="font-face-result-area" class="result-area"></pre>
-							<button type="button" id="myBtn4"
-								class="btn btn-default btn-lg save-btn">Save</button>
-							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
-						</div>
-
-						<!-- Modal -->
-						<div class="modal fade" id="myModal4" role="dialog">
-							<div class="modal-dialog">
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">×</button>
-										<h4 class="modal-title">Confirm save</h4>
-									</div>
-									<div class="modal-body row">
-										<div class="col-md-1"></div>
-										<div class="col-md-1">
-											<h:outputText style="text-align:right" value="Name" />
-										</div>
-										<div class="col-md-6">
-											<h:inputText value="#{controller.currentStyle.styleName}"
-												styleClass="ui-g-3">Name</h:inputText>
-										</div>
-									</div>
-									<br />
-									<div class="row">
-										<div class="col-md-7" />
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.save}"
-												style="margin-bottom:10px;" styleClass="btn btn-default "
-												value="OK" />
-										</div>
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.resetCSS}" value="Back"
-												class="btn btn-default" style="margin-bottom:10px;"
-												data-dismiss="modal" />
-										</div>
-									</div>
-								</div>
+							<textarea name="font-face-result-area" id="font-face-result-area" class="result-area"></textarea>
+							<label>Saved styles:
+							 <h:selectOneMenu
+									id="saved-font-face-styles" value="#{controller.selectedId}"
+									immediate="true" valueChangeListener="#{controller.changeSelectedStyle}">
+									<f:selectItems 
+										value="#{controller.listOfCssStyles}" var="cssStyle"
+										itemLabel="#{cssStyle.styleName}" itemValue="#{cssStyle.id}">
+									</f:selectItems>
+									<f:ajax event="click" execute="@this" render="preview4" />
+								</h:selectOneMenu>
+								 <h:commandLink value="Delete" styleClass="btn"
+									action="#{controller.delete}">
+									<f:ajax execute="@this "
+										render="saved-font-face-styles preview4 msg" />
+								</h:commandLink>
+							</label>
+							<h:inputTextarea id="preview4" value="#{controller.preview}" />
+							<div>
+								<button type="button" style="margin: 10px; 0px;"
+									class="btn btn-default btn-lg show-modal">Save</button>
+								<button type="button" style="margin: 10px; 0px"
+									class="back-btn btn btn-default btn-lg ">Back</button>
 							</div>
 						</div>
 
@@ -480,49 +341,31 @@
 							class="multiple-columns-input dynamic-input" /> <i>px</i></label>
 						<div id="multiple-columns-code" class="code-area"
 							style="display: block;">
-							<pre id="multiple-columns-result-area" class="code-area"></pre>
-							<button type="button" id="myBtn5"
-								class="btn btn-default btn-lg save-btn">Save</button>
-							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
-						</div>
-
-						<!-- Modal -->
-						<div class="modal fade" id="myModal5" role="dialog">
-							<div class="modal-dialog">
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">×</button>
-										<h4 class="modal-title">Confirm save</h4>
-									</div>
-									<div class="modal-body row">
-										<div class="col-md-1"></div>
-										<div class="col-md-1">
-											<h:outputText style="text-align:right" value="Name" />
-										</div>
-										<div class="col-md-6">
-											<h:inputText value="#{controller.currentStyle.styleName}"
-												styleClass="ui-g-3">Name</h:inputText>
-										</div>
-									</div>
-									<br />
-									<div class="row">
-										<div class="col-md-7" />
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.save}"
-												style="margin-bottom:10px;" styleClass="btn btn-default "
-												value="OK" />
-										</div>
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.resetCSS}" value="Back"
-												class="btn btn-default" style="margin-bottom:10px;"
-												data-dismiss="modal" />
-										</div>
-									</div>
-								</div>
+							<textarea name="multiple-columns-result-area" id="multiple-columns-result-area" class="code-area"></textarea>
+							<label>Saved styles:
+							 <h:selectOneMenu
+									id="saved-multiple-columns-styles" value="#{controller.selectedId}"
+									immediate="true" valueChangeListener="#{controller.changeSelectedStyle}">
+									<f:selectItems 
+										value="#{controller.listOfCssStyles}" var="cssStyle"
+										itemLabel="#{cssStyle.styleName}" itemValue="#{cssStyle.id}">
+									</f:selectItems>
+									<f:ajax event="click" execute="@this" render="preview5" />
+								</h:selectOneMenu>
+								 <h:commandLink value="Delete" styleClass="btn"
+									action="#{controller.delete}">
+									<f:ajax execute="@this "
+										render="saved-multiple-columns-styles preview5 msg" />
+								</h:commandLink>
+							</label>
+							<h:inputTextarea id="preview5" value="#{controller.preview}" />
+							<div>
+								<button type="button" style="margin: 10px; 0px;"
+									class="btn btn-default btn-lg show-modal">Save</button>
+								<button type="button" style="margin: 10px; 0px"
+									class="back-btn btn btn-default btn-lg ">Back</button>
 							</div>
 						</div>
-
 					</div>
 					<div id="box-resize" class="interaction-area">
 						<label><span>Box Resize:</span> <select tabindex="28"
@@ -537,43 +380,6 @@
 							<button type="button" id="myBtn6"
 								class="btn btn-default btn-lg save-btn">Save</button>
 							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
-						</div>
-
-						<!-- Modal -->
-						<div class="modal fade" id="myModal6" role="dialog">
-							<div class="modal-dialog">
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">×</button>
-										<h4 class="modal-title">Confirm save</h4>
-									</div>
-									<div class="modal-body row">
-										<div class="col-md-1"></div>
-										<div class="col-md-1">
-											<h:outputText style="text-align:right" value="Name" />
-										</div>
-										<div class="col-md-6">
-											<h:inputText value="#{controller.currentStyle.styleName}"
-												styleClass="ui-g-3">Name</h:inputText>
-										</div>
-									</div>
-									<br />
-									<div class="row">
-										<div class="col-md-7" />
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.save}"
-												style="margin-bottom:10px;" styleClass="btn btn-default "
-												value="OK" />
-										</div>
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.resetCSS}" value="Back"
-												class="btn btn-default" style="margin-bottom:10px;"
-												data-dismiss="modal" />
-										</div>
-									</div>
-								</div>
-							</div>
 						</div>
 
 					</div>
@@ -602,43 +408,6 @@
 							<button type="button" id="myBtn7"
 								class="btn btn-default btn-lg save-btn">Save</button>
 							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
-						</div>
-
-						<!-- Modal -->
-						<div class="modal fade" id="myModal7" role="dialog">
-							<div class="modal-dialog">
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">×</button>
-										<h4 class="modal-title">Confirm save</h4>
-									</div>
-									<div class="modal-body row">
-										<div class="col-md-1"></div>
-										<div class="col-md-1">
-											<h:outputText style="text-align:right" value="Name" />
-										</div>
-										<div class="col-md-6">
-											<h:inputText value="#{controller.currentStyle.styleName}"
-												styleClass="ui-g-3">Name</h:inputText>
-										</div>
-									</div>
-									<br />
-									<div class="row">
-										<div class="col-md-7" />
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.save}"
-												style="margin-bottom:10px;" styleClass="btn btn-default "
-												value="OK" />
-										</div>
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.resetCSS}" value="Back"
-												class="btn btn-default" style="margin-bottom:10px;"
-												data-dismiss="modal" />
-										</div>
-									</div>
-								</div>
-							</div>
 						</div>
 
 					</div>
@@ -674,45 +443,8 @@
 								class="btn btn-default btn-lg save-btn">Save</button>
 							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
 						</div>
-						<!-- Modal -->
-						<div class="modal fade" id="myModal8" role="dialog">
-							<div class="modal-dialog">
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">×</button>
-										<h4 class="modal-title">Confirm save</h4>
-									</div>
-									<div class="modal-body row">
-										<div class="col-md-1"></div>
-										<div class="col-md-1">
-											<h:outputText style="text-align:right" value="Name" />
-										</div>
-										<div class="col-md-6">
-											<h:inputText value="#{controller.currentStyle.styleName}"
-												styleClass="ui-g-3">Name</h:inputText>
-										</div>
-									</div>
-									<br />
-									<div class="row">
-										<div class="col-md-7" />
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.save}"
-												style="margin-bottom:10px;" styleClass="btn btn-default "
-												value="OK" />
-										</div>
-										<div class="col-md-2">
-											<h:commandLink action="#{controller.resetCSS}" value="Back"
-												class="btn btn-default" style="margin-bottom:10px;"
-												data-dismiss="modal" />
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
 
 					</div>
-
 					<div id="transform" class="interaction-area">
 						<label> <span>Scale:</span> <input tabindex="37"
 							name="transform-scale" type="text" size="2"
@@ -734,46 +466,55 @@
 						</div>
 					</div>
 
-					<!-- Modal -->
-					<div class="modal fade" id="myModal9" role="dialog">
-						<div class="modal-dialog">
-							<!-- Modal content-->
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">×</button>
-									<h4 class="modal-title">Confirm save</h4>
+				
+				
+
+			</div>
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">×</button>
+								<h4 class="modal-title">Confirm save</h4>
+							</div>
+							<div class="modal-body row">
+								<div class="col-md-1"></div>
+								<div class="col-md-1">
+									<h:outputText style="text-align:right" value="Name" />
 								</div>
-								<div class="modal-body row">
-									<div class="col-md-1"></div>
-									<div class="col-md-1">
-										<h:outputText style="text-align:right" value="Name" />
-									</div>
-									<div class="col-md-6">
-										<h:inputText value="#{controller.currentStyle.styleName}"
-											styleClass="ui-g-3">Name</h:inputText>
-									</div>
-								</div>
-								<br />
-								<div class="row">
-									<div class="col-md-7" />
-									<div class="col-md-2">
-										<h:commandLink action="#{controller.save}"
-											style="margin-bottom:10px;" styleClass="btn btn-default "
-											value="OK" />
-									</div>
-									<div class="col-md-2">
-										<h:commandLink action="#{controller.resetCSS}" value="Back"
-											class="btn btn-default" style="margin-bottom:10px;"
-											data-dismiss="modal" />
-									</div>
+								<div class="col-md-6">
+									<h:inputText id="input-name"
+										value="#{controller.currentStyle.styleName}"
+										styleClass="ui-g-3" />
 								</div>
 							</div>
+							<br />
+							<div class="row">
+								<div class="col-md-7" />
+								<div class="col-md-2">
+									<h:commandLink action="#{controller.save}"
+										style="margin-bottom:10px;"
+										styleClass="btn btn-default clear hide-modal" value="OK">
+										<f:ajax execute="input-name"
+											render="form:saved-border-radius-styles saved-box-shadow-styles saved-text-shadow-styles saved-rgba-styles
+											 saved-font-face-styles saved-multiple-columns-styles
+											 input-name form:msg" />
+									</h:commandLink>
+								</div>
+								<div class="col-md-2">
+									<h:commandLink class="btn btn-default clear hide-modal"
+										style="margin-bottom: 10px;" value="Back">
+										<f:ajax render="form:input-name msg" />
+									</h:commandLink>
+								</div>
+							</div>
+
 						</div>
 					</div>
-
 				</div>
-			</div>
-
+			</div>	
 		</h:form>
 	</div>
 	<script type="text/javascript" src="main.js" />

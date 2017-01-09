@@ -60,56 +60,6 @@ var transform={
   skewY:""
 };
 
-$(document).ready(function(){
-	  $("#myBtn").click(function(){
-	        $("#myModal").modal({backdrop: false});
-	    });
-});
-$(document).ready(function(){
-	  $("#myBtn1").click(function(){
-	        $("#myModal1").modal({backdrop: false});
-	    });
-});
-$(document).ready(function(){
-	  $("#myBtn2").click(function(){
-	        $("#myModal2").modal({backdrop: false});
-	    });
-});
-$(document).ready(function(){
-	  $("#myBtn3").click(function(){
-	        $("#myModal3").modal({backdrop: false});
-	    });
-});
-$(document).ready(function(){
-	  $("#myBtn4").click(function(){
-	        $("#myModal4").modal({backdrop: false});
-	    });
-});
-$(document).ready(function(){
-	  $("#myBtn5").click(function(){
-	        $("#myModal5").modal({backdrop: false});
-	    });
-});
-$(document).ready(function(){
-	  $("#myBtn6").click(function(){
-	        $("#myModal6").modal({backdrop: false});
-	    });
-});
-$(document).ready(function(){
-	  $("#myBtn7").click(function(){
-	        $("#myModal7").modal({backdrop: false});
-	    });
-});
-$(document).ready(function(){
-	  $("#myBtn8").click(function(){
-	        $("#myModal8").modal({backdrop: false});
-	    });
-});
-$(document).ready(function(){
-	  $("#myBtn9").click(function(){
-	        $("#myModal9").modal({backdrop: false});
-	    });
-});
 function PrintTransform()
 {
   $("#transform-result-area").html("transform: "+ "scale"+"(" + transform.scale+")"
@@ -432,14 +382,36 @@ function showBoxShadow() {
 	$("#box-shadow").css("visibility","visible");
 	$cssButtons.css("visibility","hidden");
 }
- 
+function showTextShadow() {
+	$("#text-shadow").css("visibility","visible");
+	$cssButtons.css("visibility","hidden");
+}
+function showRGBA() {
+	$("#rgba").css("visibility","visible");
+	$cssButtons.css("visibility","hidden");
+}
+function showFontFace (){
+	$("#font-face").css("visibility","visible");
+	$cssButtons.css("visibility","hidden");
+}
+function showMultipleColumns(){
+	$("#multiple-columns").css("visibility","visible");
+	$cssButtons.css("visibility","hidden");
+}
  $(".back-btn").on("click",function() {
 	  $cssButtons.css("visibility","visible");
 	  $(".interaction-area").css("visibility","hidden");
 	});
-function hideModal (){
-	$("#myModal").modal("hide");
-}
-function hideModal1 (){
-	$("#myModal1").modal("hide");
-}
+ 
+$(document).ready(function(){
+	  $(".show-modal").click(function(){
+	        $("#myModal").modal({backdrop: false});
+	    });
+});
+$(document).ready(function(){
+	  $(".hide-modal").click(function(){
+	        $("#myModal").modal("hide");
+	    });
+});
+
+

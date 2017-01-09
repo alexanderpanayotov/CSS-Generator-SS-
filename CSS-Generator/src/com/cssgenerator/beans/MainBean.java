@@ -35,7 +35,8 @@ import com.sun.corba.se.spi.orbutil.fsm.Action;
 public class MainBean implements Serializable {
 
 	private static final long serialVersionUID = -7182134510999986302L;
-
+	
+	private Long selectedId;
 	private CssStyle currentStyle = new CssStyle(); 
 	private List<CssStyle> listOfCssStyles;
 	private static final CssStyleDAO dao = new CssStyleDAO();
@@ -65,24 +66,6 @@ public class MainBean implements Serializable {
 		preview = temp.getCss();
 	}
 	
-	public void loadById (){
-		EntityManager entityManager = emf.createEntityManager();
-		CssStyle temp;
-		try {
-			
-			temp = dao.findById(entityManager, currentStyle.getId());
-			preview = temp.getCss();
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Инфо:", "Успешно изтриване.");
-			addFacesContextMessage(message);
-		} catch (PersistenceException e) {
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Инфо:", e.getMessage());
-			addFacesContextMessage(message);
-		}finally {
-			if (entityManager.isOpen()) {
-				entityManager.close();
-			}
-		}
-	}
 	
 	public void delete (){
 		EntityManager entityManager = emf.createEntityManager();
@@ -90,7 +73,7 @@ public class MainBean implements Serializable {
 		try {
 			transaction = entityManager.getTransaction();
 			transaction.begin();
-			dao.delete(entityManager, currentStyle.getId());
+			dao.delete(entityManager, selectedId);
 			transaction.commit();
 			
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Инфо:", "Успешно изтриване.");
@@ -117,20 +100,23 @@ public class MainBean implements Serializable {
 		EntityTransaction transaction = null;
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 				.getRequest();
-
+		
 		if (!request.getParameter("border-result-area").isEmpty()) {
 			getCurrentStyle().setCss(request.getParameter("border-result-area"));
 			getCurrentStyle().setType("border-radius");
 		} else if (!request.getParameter("boxShadow-result-area").isEmpty()) {
 			getCurrentStyle().setCss(request.getParameter("boxShadow-result-area"));
 			getCurrentStyle().setType("box-shadow");
-		} else if (request.getParameter("boxShadow-result-area") != null) {
-			getCurrentStyle().setCss(request.getParameter("border-result-area"));
-			getCurrentStyle().setType("border-radius");
-		} else if (request.getParameter("boxShadow-result-area") != null) {
-			getCurrentStyle().setCss(request.getParameter("border-result-area"));
-			getCurrentStyle().setType("border-radius");
-		}
+		} else if (!request.getParameter("text-shadow-result-area").isEmpty()) {
+			getCurrentStyle().setCss(request.getParameter("text-shadow-result-area"));
+			getCurrentStyle().setType("text-shadow");
+		} else if (!request.getParameter("rgba-result-area").isEmpty()) {
+			getCurrentStyle().setCss(request.getParameter("rgba-result-area"));
+			getCurrentStyle().setType("rgba");
+		}	else if (!request.getParameter("multiple-columns-result-area").isEmpty()) {
+			getCurrentStyle().setCss(request.getParameter("multiple-columns-result-area"));
+			getCurrentStyle().setType("multiple-columns");
+		}	
 		
 		try {
 			transaction = entityManager.getTransaction();
@@ -161,19 +147,6 @@ public class MainBean implements Serializable {
 			currentStyle = new CssStyle();
 		}
 		
-		return null;
-	}
-
-	public String load() {
-
-		EntityManager entityManager = emf.createEntityManager();
-		try {
-			setListOfCssStyles(dao.loadAllStyles(entityManager));
-		} catch (PersistenceException e) {
-			e.printStackTrace();
-		} finally {
-			entityManager.close();
-		}
 		return null;
 	}
 
@@ -225,6 +198,14 @@ public class MainBean implements Serializable {
 
 	public void setPreview(String preview) {
 		this.preview = preview;
+	}
+
+	public Long getSelectedId() {
+		return selectedId;
+	}
+
+	public void setSelectedId(Long selectedId) {
+		this.selectedId = selectedId;
 	}
 
 }
