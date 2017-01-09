@@ -113,10 +113,22 @@ public class MainBean implements Serializable {
 		} else if (!request.getParameter("rgba-result-area").isEmpty()) {
 			getCurrentStyle().setCss(request.getParameter("rgba-result-area"));
 			getCurrentStyle().setType("rgba");
-		}	else if (!request.getParameter("multiple-columns-result-area").isEmpty()) {
+		} else if (!request.getParameter("multiple-columns-result-area").isEmpty()) {
 			getCurrentStyle().setCss(request.getParameter("multiple-columns-result-area"));
 			getCurrentStyle().setType("multiple-columns");
-		}	
+		} else if (!request.getParameter("box-resize-result-area").isEmpty()) {
+			getCurrentStyle().setCss(request.getParameter("box-resize-result-area"));
+			getCurrentStyle().setType("box-resize");
+		} else if (!request.getParameter("outline-result-area").isEmpty()) {
+			getCurrentStyle().setCss(request.getParameter("outline-result-area"));
+			getCurrentStyle().setType("outline");
+		} else if (!request.getParameter("transition-result-area").isEmpty()) {
+			getCurrentStyle().setCss(request.getParameter("transition-result-area"));
+			getCurrentStyle().setType("transition");
+		} else if (!request.getParameter("transform-result-area").isEmpty()) {
+			getCurrentStyle().setCss(request.getParameter("transform-result-area"));
+			getCurrentStyle().setType("transform");
+		}							
 		
 		try {
 			transaction = entityManager.getTransaction();

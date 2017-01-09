@@ -62,30 +62,29 @@
 				<div class="form-group">
 					<label for=""></label>
 					<h:commandLink type="button" value="RGBA"
-					action="#{controller.loadByType('rgba')}"
+						action="#{controller.loadByType('rgba')}"
 						styleClass="btn btn-primary btn-lg btn-block btn-success">
 						<f:ajax onevent="showRGBA" execute="@this"
 							render="saved-rgba-styles msg"></f:ajax>
-						</h:commandLink>
+					</h:commandLink>
 				</div>
 				<div class="form-group">
 					<label for=""></label>
 					<h:commandLink type="button" value="Font Face"
-					action="#{controller.loadByType('font-face')}"
-						styleClass="btn btn-primary btn-lg btn-block btn-success" >
+						action="#{controller.loadByType('font-face')}"
+						styleClass="btn btn-primary btn-lg btn-block btn-success">
 						<f:ajax onevent="showFontFace" execute="@this"
 							render="saved-font-face-styles msg"></f:ajax>
-						</h:commandLink>
+					</h:commandLink>
 				</div>
 				<div class="form-group">
-
 					<label for=""></label>
-					<h:commandLink type="button" value="Multiple Colums" 
+					<h:commandLink type="button" value="Multiple Colums"
 						action="#{controller.loadByType('multiple-columns')}"
 						styleClass="btn btn-primary btn-lg btn-block btn-success">
 						<f:ajax onevent="showMultipleColumns" execute="@this"
 							render="saved-font-face-styles msg"></f:ajax>
-						</h:commandLink>
+					</h:commandLink>
 				</div>
 				<div>
 					<img id="html" src="HTML.png" class="img-responsive photo-html"
@@ -93,27 +92,39 @@
 				</div>
 				<div class="form-group">
 					<label for=""></label>
-					<h:commandButton id="btn-box-resize" type="button"
-						styleClass="btn btn-primary btn-lg btn-block btn-success"
-						value="Box Resize" />
+					<h:commandLink type="button" value="Box Resize"
+					action="#{controller.loadByType('box-resize')}"
+						styleClass="btn btn-primary btn-lg btn-block btn-success">
+						<f:ajax onevent="showBoxResize" execute="@this"
+							render="saved-box-resize-styles msg"></f:ajax>
+					</h:commandLink>
 				</div>
 				<div class="form-group">
 					<label for=""></label>
-					<h:commandButton id="btn-outline" type="button"
-						styleClass="btn btn-primary btn-lg btn-block btn-success"
-						value="Outline" />
+					<h:commandLink type="button" value="Outline"
+					action="#{controller.loadByType('outline')}"
+						styleClass="btn btn-primary btn-lg btn-block btn-success">
+						<f:ajax onevent="showOutline" execute="@this"
+							render="saved-outline-styles msg"></f:ajax>
+						</h:commandLink>
 				</div>
 				<div class="form-group">
 					<label for=""></label>
-					<h:commandButton id="btn-transition" type="button"
-						styleClass="btn btn-primary btn-lg btn-block btn-success"
-						value="Transition" />
+					<h:commandLink type="button" value="Transition" 
+					action="#{controller.loadByType('transition')}"
+ 						styleClass="btn btn-primary btn-lg btn-block btn-success">
+						<f:ajax onevent="showTransition" execute="@this"
+							render="saved-transiotion-styles msg"></f:ajax>
+						</h:commandLink>
 				</div>
 				<div class="form-group">
 					<label for=""></label>
-					<h:commandButton id="btn-transform" type="button"
-						class="btn btn-primary btn-lg btn-block btn-success"
-						value="Transform" />
+					<h:commandLink type="button" value="Transform"
+					action="#{controller.loadByType('transform')}"
+						class="btn btn-primary btn-lg btn-block btn-success">
+						<f:ajax onevent="showTransform" execute="@this"
+							render="saved-transform-styles msg"></f:ajax>
+						</h:commandLink>
 				</div>
 			</div>
 
@@ -133,8 +144,7 @@
 						<div id="border-radius-code" class="code-area">
 							<textarea name="border-result-area" id="border-result-area"
 								class="result-area" />
-							<label>Saved styles: 
-							<h:selectOneMenu
+							<label>Saved styles: <h:selectOneMenu
 									id="saved-border-radius-styles"
 									value="#{controller.selectedId}" immediate="true"
 									valueChangeListener="#{controller.changeSelectedStyle}">
@@ -143,8 +153,7 @@
 										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview" />
-								</h:selectOneMenu>
-								 <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
 									action="#{controller.delete}">
 									<f:ajax execute="@this "
 										render="saved-border-radius-styles preview msg" />
@@ -192,18 +201,16 @@
 						<div id="box-shadow-code" class="code-area">
 							<textarea name="boxShadow-result-area" id="boxShadow-result-area"
 								class="result-area"></textarea>
-							<label>Saved styles:
-							 <h:selectOneMenu
+							<label>Saved styles: <h:selectOneMenu
 									id="saved-box-shadow-styles" value="#{controller.selectedId}"
 									immediate="true"
 									valueChangeListener="#{controller.changeSelectedStyle}">
-									<f:selectItems 
-										value="#{controller.listOfCssStyles}" var="cssStyle"
-										itemLabel="#{cssStyle.styleName}" itemValue="#{cssStyle.id}">
+									<f:selectItems value="#{controller.listOfCssStyles}"
+										var="cssStyle" itemLabel="#{cssStyle.styleName}"
+										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview1" />
-								</h:selectOneMenu>
-								 <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
 									action="#{controller.delete}">
 									<f:ajax execute="@this "
 										render="saved-box-shadow-styles preview1 msg" />
@@ -237,13 +244,12 @@
 									id="saved-text-shadow-styles" value="#{controller.selectedId}"
 									immediate="true"
 									valueChangeListener="#{controller.changeSelectedStyle}">
-									<f:selectItems 
-										value="#{controller.listOfCssStyles}" var="cssStyle"
-										itemLabel="#{cssStyle.styleName}" itemValue="#{cssStyle.id}">
+									<f:selectItems value="#{controller.listOfCssStyles}"
+										var="cssStyle" itemLabel="#{cssStyle.styleName}"
+										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview2" />
-								</h:selectOneMenu>
-								 <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
 									action="#{controller.delete}">
 									<f:ajax execute="@this "
 										render="saved-text-shadow-styles preview msg" />
@@ -271,22 +277,22 @@
 							type="text" size="2" class="rgba-input dynamic-input" /></label>
 
 						<div id="rgba-code" class="code-area">
-							<textarea name="rgba-result-area" id="rgba-result-area" class="result-area"></textarea>
-							<label>Saved styles:
-							 <h:selectOneMenu
+							<textarea name="rgba-result-area" id="rgba-result-area"
+								class="result-area"></textarea>
+							<label>Saved styles: <h:selectOneMenu
 									id="saved-rgba-styles" value="#{controller.selectedId}"
-									immediate="true" valueChangeListener="#{controller.changeSelectedStyle}">
-									<f:selectItems 
-										value="#{controller.listOfCssStyles}" var="cssStyle"
-										itemLabel="#{cssStyle.styleName}" itemValue="#{cssStyle.id}">
+									immediate="true"
+									valueChangeListener="#{controller.changeSelectedStyle}">
+									<f:selectItems value="#{controller.listOfCssStyles}"
+										var="cssStyle" itemLabel="#{cssStyle.styleName}"
+										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview3" />
-								</h:selectOneMenu>
-								 <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
 									action="#{controller.delete}">
 									<f:ajax execute="@this "
 										render="saved-rgba-styles preview3 msg" />
-									</h:commandLink>
+								</h:commandLink>
 							</label>
 							<h:inputTextarea id="preview3" value="#{controller.preview}" />
 							<div>
@@ -297,7 +303,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div id="font-face" class="interaction-area">
 						<label> <span>Font Family:</span> <input tabindex="24"
 							type="text" size="10" class="font-face-input dynamic-input" />
@@ -305,18 +311,18 @@
 							name="font-face-name" type="text" size="10"
 							class="font-face-input dynamic-input" /></label>
 						<div id="font-face-code" class="code-area">
-							<textarea name="font-face-result-area" id="font-face-result-area" class="result-area"></textarea>
-							<label>Saved styles:
-							 <h:selectOneMenu
+							<textarea name="font-face-result-area" id="font-face-result-area"
+								class="result-area"></textarea>
+							<label>Saved styles: <h:selectOneMenu
 									id="saved-font-face-styles" value="#{controller.selectedId}"
-									immediate="true" valueChangeListener="#{controller.changeSelectedStyle}">
-									<f:selectItems 
-										value="#{controller.listOfCssStyles}" var="cssStyle"
-										itemLabel="#{cssStyle.styleName}" itemValue="#{cssStyle.id}">
+									immediate="true"
+									valueChangeListener="#{controller.changeSelectedStyle}">
+									<f:selectItems value="#{controller.listOfCssStyles}"
+										var="cssStyle" itemLabel="#{cssStyle.styleName}"
+										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview4" />
-								</h:selectOneMenu>
-								 <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
 									action="#{controller.delete}">
 									<f:ajax execute="@this "
 										render="saved-font-face-styles preview4 msg" />
@@ -341,18 +347,18 @@
 							class="multiple-columns-input dynamic-input" /> <i>px</i></label>
 						<div id="multiple-columns-code" class="code-area"
 							style="display: block;">
-							<textarea name="multiple-columns-result-area" id="multiple-columns-result-area" class="code-area"></textarea>
-							<label>Saved styles:
-							 <h:selectOneMenu
-									id="saved-multiple-columns-styles" value="#{controller.selectedId}"
-									immediate="true" valueChangeListener="#{controller.changeSelectedStyle}">
-									<f:selectItems 
-										value="#{controller.listOfCssStyles}" var="cssStyle"
-										itemLabel="#{cssStyle.styleName}" itemValue="#{cssStyle.id}">
+							<textarea name="multiple-columns-result-area"
+								id="multiple-columns-result-area" class="code-area"></textarea>
+							<label>Saved styles: <h:selectOneMenu
+									id="saved-multiple-columns-styles"
+									value="#{controller.selectedId}" immediate="true"
+									valueChangeListener="#{controller.changeSelectedStyle}">
+									<f:selectItems value="#{controller.listOfCssStyles}"
+										var="cssStyle" itemLabel="#{cssStyle.styleName}"
+										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview5" />
-								</h:selectOneMenu>
-								 <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
 									action="#{controller.delete}">
 									<f:ajax execute="@this "
 										render="saved-multiple-columns-styles preview5 msg" />
@@ -376,12 +382,30 @@
 								<!-- <optionvalue="both">Both</optionvalue> -->
 						</select></label>
 						<div id="box-resize-code" class="code-area">
-							<pre id="box-resize-result-area" class="result-area"></pre>
-							<button type="button" id="myBtn6"
-								class="btn btn-default btn-lg save-btn">Save</button>
-							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
+							<textarea name="box-resize-result-area" id="box-resize-result-area" class="result-area"></textarea>
+							<label>Saved styles: <h:selectOneMenu
+									id="saved-box-resize-styles"
+									value="#{controller.selectedId}" immediate="true"
+									valueChangeListener="#{controller.changeSelectedStyle}">
+									<f:selectItems value="#{controller.listOfCssStyles}"
+										var="cssStyle" itemLabel="#{cssStyle.styleName}"
+										itemValue="#{cssStyle.id}">
+									</f:selectItems>
+									<f:ajax event="click" execute="@this" render="preview6" />
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
+									action="#{controller.delete}">
+									<f:ajax execute="@this "
+										render="saved-box-resize-styles preview5 msg" />
+								</h:commandLink>
+							</label>
+							<h:inputTextarea id="preview6" value="#{controller.preview}" />
+							<div>
+								<button type="button" style="margin: 10px; 0px;"
+									class="btn btn-default btn-lg show-modal">Save</button>
+								<button type="button" style="margin: 10px; 0px"
+									class="back-btn btn btn-default btn-lg ">Back</button>
+							</div>
 						</div>
-
 					</div>
 					<div id="outline" class="interaction-area">
 						<label> <span>OutlineThickness:</span> <input
@@ -404,10 +428,29 @@
 							size="10" class="outline-input dynamic-input" />
 						</label>
 						<div id="outline-code" class="code-area">
-							<pre id="outline-result-area" class="result-area"></pre>
-							<button type="button" id="myBtn7"
-								class="btn btn-default btn-lg save-btn">Save</button>
-							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
+							<textarea name="outline-result-area" id="outline-result-area" class="result-area"></textarea>
+							<label>Saved styles: <h:selectOneMenu
+									id="saved-outline-styles"
+									value="#{controller.selectedId}" immediate="true"
+									valueChangeListener="#{controller.changeSelectedStyle}">
+									<f:selectItems value="#{controller.listOfCssStyles}"
+										var="cssStyle" itemLabel="#{cssStyle.styleName}"
+										itemValue="#{cssStyle.id}">
+									</f:selectItems>
+									<f:ajax event="click" execute="@this" render="preview7" />
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
+									action="#{controller.delete}">
+									<f:ajax execute="@this"
+										render="saved-outline-styles preview7 msg" />
+								</h:commandLink>
+							</label>
+							<h:inputTextarea id="preview7" value="#{controller.preview}" />
+							<div>
+								<button type="button" style="margin: 10px; 0px;"
+									class="btn btn-default btn-lg show-modal">Save</button>
+								<button type="button" style="margin: 10px; 0px"
+									class="back-btn btn btn-default btn-lg ">Back</button>
+							</div>
 						</div>
 
 					</div>
@@ -438,10 +481,29 @@
 						</select></label>
 
 						<div id="transition-code" class="result-area">
-							<pre id="transition-result-area" class="result-area"></pre>
-							<button type="button" id="myBtn8"
-								class="btn btn-default btn-lg save-btn">Save</button>
-							<button type="button" class="back-btn btn btn-default btn-lg ">Back</button>
+							<textarea name="transition-result-area" id="transition-result-area" class="result-area"></textarea>
+							<label>Saved styles: <h:selectOneMenu
+									id="saved-transiotion-styles"
+									value="#{controller.selectedId}" immediate="true"
+									valueChangeListener="#{controller.changeSelectedStyle}">
+									<f:selectItems value="#{controller.listOfCssStyles}"
+										var="cssStyle" itemLabel="#{cssStyle.styleName}"
+										itemValue="#{cssStyle.id}">
+									</f:selectItems>
+									<f:ajax event="click" execute="@this" render="preview8" />
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
+									action="#{controller.delete}">
+									<f:ajax execute="@this"
+										render="saved-transiotion-styles preview8 msg" />
+								</h:commandLink>
+							</label>
+							<h:inputTextarea id="preview8" value="#{controller.preview}" />
+							<div>
+								<button type="button" style="margin: 10px; 0px;"
+									class="btn btn-default btn-lg show-modal">Save</button>
+								<button type="button" style="margin: 10px; 0px"
+									class="back-btn btn btn-default btn-lg ">Back</button>
+							</div>
 						</div>
 
 					</div>
@@ -462,16 +524,38 @@
 							class="transform-input dynamic-input" /><i>deg</i>
 						</label>
 						<div id="transform-code" class="code-area" style="display: block;">
-							<pre id="transform-result-area" class="result-area"></pre>
+							<textarea name="transform-result-area" id="transform-result-area" class="result-area"></textarea>
+							<label>Saved styles: <h:selectOneMenu
+									id="saved-transform-styles"
+									value="#{controller.selectedId}" immediate="true"
+									valueChangeListener="#{controller.changeSelectedStyle}">
+									<f:selectItems value="#{controller.listOfCssStyles}"
+										var="cssStyle" itemLabel="#{cssStyle.styleName}"
+										itemValue="#{cssStyle.id}">
+									</f:selectItems>
+									<f:ajax event="click" execute="@this" render="preview9" />
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
+									action="#{controller.delete}">
+									<f:ajax execute="@this"
+										render="saved-transform-styles preview9 msg" />
+								</h:commandLink>
+							</label>
+							<h:inputTextarea id="preview9" value="#{controller.preview}" />
+							<div>
+								<button type="button" style="margin: 10px; 0px;"
+									class="btn btn-default btn-lg show-modal">Save</button>
+								<button type="button" style="margin: 10px; 0px"
+									class="back-btn btn btn-default btn-lg ">Back</button>
+							</div>
 						</div>
 					</div>
 
-				
-				
 
-			</div>
-			<!-- Modal -->
-			<div class="modal fade" id="myModal" role="dialog">
+
+
+				</div>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog">
 						<!-- Modal content-->
 						<div class="modal-content">
@@ -496,11 +580,11 @@
 								<div class="col-md-2">
 									<h:commandLink action="#{controller.save}"
 										style="margin-bottom:10px;"
-										styleClass="btn btn-default clear hide-modal" value="OK">
+										styleClass="btn btn-default clear hide-modal" value="Ok">
 										<f:ajax execute="input-name"
 											render="form:saved-border-radius-styles saved-box-shadow-styles saved-text-shadow-styles saved-rgba-styles
-											 saved-font-face-styles saved-multiple-columns-styles
-											 input-name form:msg" />
+											 saved-font-face-styles saved-multiple-columns-styles saved-box-resize-styles saved-outline-styles
+											 saved-transform-styles saved-transiotion-styles input-name form:msg" />
 									</h:commandLink>
 								</div>
 								<div class="col-md-2">
@@ -514,7 +598,7 @@
 						</div>
 					</div>
 				</div>
-			</div>	
+			</div>
 		</h:form>
 	</div>
 	<script type="text/javascript" src="main.js" />

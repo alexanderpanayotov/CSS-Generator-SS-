@@ -398,6 +398,22 @@ function showMultipleColumns(){
 	$("#multiple-columns").css("visibility","visible");
 	$cssButtons.css("visibility","hidden");
 }
+function showBoxResize() {
+	$("#box-resize").css("visibility","visible");
+	$cssButtons.css("visibility","hidden");
+}
+function showOutline(){
+	$("#outline").css("visibility","visible");
+	$cssButtons.css("visibility","hidden");
+}
+function showTransition(){
+	$("#transition").css("visibility","visible");
+	$cssButtons.css("visibility","hidden");
+}
+function showTransform(){
+	$("#transform").css("visibility","visible");
+	$cssButtons.css("visibility","hidden");
+}
  $(".back-btn").on("click",function() {
 	  $cssButtons.css("visibility","visible");
 	  $(".interaction-area").css("visibility","hidden");
