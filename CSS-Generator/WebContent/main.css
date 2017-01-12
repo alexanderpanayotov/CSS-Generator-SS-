@@ -187,7 +187,7 @@ body {
 	text-align: start;
 	margin: 0em 0em 0em 0em;
 	font: 13.3333px Arial;
-	font-size: 16px;
+	font-size: 23px;
 	padding: 5px;
 	border-radius: 3px;
 	border: 1px solid #ccc;
@@ -199,6 +199,8 @@ label {
 	max-width: 100%;
 	margin-bottom: 5px;
 	font-weight: bold;
+	
+	
 }
 
 label span {
@@ -207,6 +209,7 @@ label span {
 	float: left;
 	width: 135px;
 	padding-top: 9px;
+	font-size: 20px;
 }
 
 .dynamic-select {
@@ -228,13 +231,13 @@ label span {
 	width: 100px;
 	padding-top: 9px;
 	display: block;
-	font-size: 14px;
+	font-size: 45px;
 }
 
 .main-area {
 	max-width: 1024px;
 	margin: 0 auto;
-	position: fixed;
+	position: absolute;
 	top: 30%;
 	min-height: 100px;
 	left: 30%;
@@ -260,9 +263,9 @@ label span {
 	background: #E7B928;
 	border: 1px solid #ddd;
 	border-bottom: 3px solid #E7B928;
-	margin: 0 auto 20px;
+	margin: 0 auto 60px;
 	opacity: 1;
-	padding: 20px;
+	padding: 60px;
 }
 
 .interaction-area select {
@@ -278,3 +281,13 @@ textarea {
   resize: none;
   margin: 20px 0px;
 }	
+.message{
+	text-align: absolute;
+	font-weight: bold;
+	font-size: 150%;
+	color: #337ab7;
+	display:block;
+}
+textarea+label{
+	font-size: 20px;
+}

@@ -24,8 +24,7 @@
 	</header>
 	<div class="wrapper">
 		<h:form id="form">
-			<h:messages id="msg" showDetail="true" showSummary="true"
-				style="text-align:center; margin-left:75%" />
+			
 
 			<div class="btn-category">
 				<div class="form-group">
@@ -40,6 +39,7 @@
 						<f:ajax onevent="showBorderRadius" execute="@this"
 							render="saved-border-radius-styles msg"></f:ajax>
 					</h:commandLink>
+					<h:messages class="message" id="msg" showDetail="true" showSummary="true" />
 				</div>
 				<div class="form-group">
 					<label for=""></label>
@@ -153,7 +153,7 @@
 										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview" />
-								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn btn-default"
 									action="#{controller.delete}">
 									<f:ajax execute="@this "
 										render="saved-border-radius-styles preview msg" />
@@ -210,7 +210,7 @@
 										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview1" />
-								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn btn-default"
 									action="#{controller.delete}">
 									<f:ajax execute="@this "
 										render="saved-box-shadow-styles preview1 msg" />
@@ -249,7 +249,7 @@
 										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview2" />
-								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn btn-default"
 									action="#{controller.delete}">
 									<f:ajax execute="@this "
 										render="saved-text-shadow-styles preview msg" />
@@ -288,7 +288,7 @@
 										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview3" />
-								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn btn-default"
 									action="#{controller.delete}">
 									<f:ajax execute="@this "
 										render="saved-rgba-styles preview3 msg" />
@@ -322,7 +322,7 @@
 										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview4" />
-								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn btn-default"
 									action="#{controller.delete}">
 									<f:ajax execute="@this "
 										render="saved-font-face-styles preview4 msg" />
@@ -358,7 +358,7 @@
 										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview5" />
-								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn btn-default"
 									action="#{controller.delete}">
 									<f:ajax execute="@this "
 										render="saved-multiple-columns-styles preview5 msg" />
@@ -392,7 +392,7 @@
 										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview6" />
-								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn btn-default"
 									action="#{controller.delete}">
 									<f:ajax execute="@this "
 										render="saved-box-resize-styles preview5 msg" />
@@ -438,7 +438,7 @@
 										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview7" />
-								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn btn-default"
 									action="#{controller.delete}">
 									<f:ajax execute="@this"
 										render="saved-outline-styles preview7 msg" />
@@ -491,7 +491,7 @@
 										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview8" />
-								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn btn-default"
 									action="#{controller.delete}">
 									<f:ajax execute="@this"
 										render="saved-transiotion-styles preview8 msg" />
@@ -534,7 +534,7 @@
 										itemValue="#{cssStyle.id}">
 									</f:selectItems>
 									<f:ajax event="click" execute="@this" render="preview9" />
-								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn"
+								</h:selectOneMenu> <h:commandLink value="Delete" styleClass="btn btn-default"
 									action="#{controller.delete}">
 									<f:ajax execute="@this"
 										render="saved-transform-styles preview9 msg" />
