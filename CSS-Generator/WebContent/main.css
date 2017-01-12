@@ -203,13 +203,13 @@ label {
 	
 }
 
+
 label span {
 	font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
 	display: block;
 	float: left;
 	width: 135px;
 	padding-top: 9px;
-	font-size: 20px;
 }
 
 .dynamic-select {
@@ -263,9 +263,9 @@ label span {
 	background: #E7B928;
 	border: 1px solid #ddd;
 	border-bottom: 3px solid #E7B928;
-	margin: 0 auto 60px;
+	margin: 0 auto 20px;
 	opacity: 1;
-	padding: 60px;
+	padding: 20px;
 }
 
 .interaction-area select {
@@ -288,6 +288,4 @@ textarea {
 	color: #337ab7;
 	display:block;
 }
-textarea+label{
-	font-size: 20px;
-}
+
