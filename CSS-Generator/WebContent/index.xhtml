@@ -24,7 +24,7 @@
 	</header>
 	<div class="wrapper">
 		<h:form id="form">
-			
+			<h:messages class="message" id="msg" showDetail="true" showSummary="true" />
 
 			<div class="btn-category">
 				<div class="form-group">
@@ -39,7 +39,7 @@
 						<f:ajax onevent="showBorderRadius" execute="@this"
 							render="saved-border-radius-styles msg"></f:ajax>
 					</h:commandLink>
-					<h:messages class="message" id="msg" showDetail="true" showSummary="true" />
+					
 				</div>
 				<div class="form-group">
 					<label for=""></label>

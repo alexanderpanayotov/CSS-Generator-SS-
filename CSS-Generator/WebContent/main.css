@@ -187,7 +187,7 @@ body {
 	text-align: start;
 	margin: 0em 0em 0em 0em;
 	font: 13.3333px Arial;
-	font-size: 23px;
+	font-size: 16px;
 	padding: 5px;
 	border-radius: 3px;
 	border: 1px solid #ccc;
@@ -199,10 +199,7 @@ label {
 	max-width: 100%;
 	margin-bottom: 5px;
 	font-weight: bold;
-	
-	
 }
-
 
 label span {
 	font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
@@ -231,13 +228,13 @@ label span {
 	width: 100px;
 	padding-top: 9px;
 	display: block;
-	font-size: 45px;
+	font-size: 14px;
 }
 
 .main-area {
 	max-width: 1024px;
 	margin: 0 auto;
-	position: absolute;
+	position: fixed;
 	top: 30%;
 	min-height: 100px;
 	left: 30%;
@@ -281,11 +278,3 @@ textarea {
   resize: none;
   margin: 20px 0px;
 }	
-.message{
-	text-align: absolute;
-	font-weight: bold;
-	font-size: 150%;
-	color: #337ab7;
-	display:block;
-}
-
